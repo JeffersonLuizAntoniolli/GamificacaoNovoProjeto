@@ -46,7 +46,7 @@
                 
                 <!--Gaming-->
                 <li th:class="${activeTab == 'Gaming'}? 'active nav-item mr-4' : 'nav-item mr-4'"
-                    sec:authorize="isAuthenticated()">
+                    sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_GAMEMASTER')">
                     <a class="nav-link" href="/about">Gaming</a>
                 </li>
                 

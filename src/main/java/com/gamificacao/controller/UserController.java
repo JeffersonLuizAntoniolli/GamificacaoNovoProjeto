@@ -27,7 +27,7 @@ public class UserController {
         model.addAttribute("isAdminSigned", isAdminSigned);
         return "views/users";
     }
-
+    // Metodo que fará a remoção do usuário do sistema
     @GetMapping("user/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);

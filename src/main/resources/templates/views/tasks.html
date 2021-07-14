@@ -26,7 +26,7 @@
                 <a href="/assignment" class="btn btn-outline-info btn-lg float-right">Mostrar Todas!</a>
             </span>
             <!-- Fim para Mostrar ou Ocultar Atividades -->
-           <span sec:authorize="hasRole('ROLE_ADMIN')">
+           <span sec:authorize="hasAnyRole('ROLE_ADMIN')">
                 <a href="/assignment" class="btn btn-outline-info btn-lg float-right">Designar Atividades</a>
             </span>
             <span sec:authorize="isAuthenticated()">

@@ -21,13 +21,13 @@ public class RegisterController {
     public RegisterController(UserService userService) {
         this.userService = userService;
     }
-
+    // Metodo Get para realizar cadastro de um novo colaborador
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
         return "forms/register";
     }
-
+    // Metodo Post para realizar cadastro de um novo colaborador
     @PostMapping("/register")
     public String registerUser(@Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -38,7 +38,7 @@ public class RegisterController {
             model.addAttribute("exist", true);
             return "register";
         }
-
+        //Se tudo certo, é cadastrado com sucesso e então vai para pagina de sucesso!
         userService.createUser(user);
         return "views/success";
     }

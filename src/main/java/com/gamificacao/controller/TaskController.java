@@ -81,13 +81,13 @@ public class TaskController {
 
         return "redirect:/tasks";
     }
-
+    // Vai apresentar a pagina de edição da atividade
     @GetMapping("/task/edit/{id}")
     public String showFilledTaskForm(@PathVariable Long id, Model model) {
         model.addAttribute("task", taskService.getTaskById(id));
         return "forms/task-edit";
     }
-
+ // Vai salvar os dados alterados e voltar a pagina de listagem da atividade
     @PostMapping("/task/edit/{id}")
     public String updateTask(@Valid Task task, BindingResult bindingResult, @PathVariable Long id, Model model) {
         if (bindingResult.hasErrors()) {

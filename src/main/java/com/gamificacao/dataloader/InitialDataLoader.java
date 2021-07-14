@@ -49,6 +49,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         //Papeis --------------------------------------------------------------------------------------------------------
         roleService.createRole(new Role("ADMIN"));
         roleService.createRole(new Role("USER"));
+        roleService.createRole(new Role("GAMEMASTER"));
         roleService.findAll().stream().map(role -> "saved role: " + role.getRole()).forEach(logger::info);
 
         //USERS --------------------------------------------------------------------------------------------------------
@@ -79,10 +80,10 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
 //        //4
 //        userService.createUser(new User(
-//                "ann@mail.com",
+//                "gamemaster@mail.com",
 //                "Ann",
 //                "112233",
-//                "images/ann.jpg"));
+//                "images/user.jpg"));
 //
 //        //5
 //        userService.createUser(new User(

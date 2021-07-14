@@ -21,7 +21,7 @@ public class AssigmentController {
         this.userService = userService;
         this.taskService = taskService;
     }
-
+    // metodo que vai retornar a pagina contendo os usuários e atividades disponiveis (Sem responsaveis)
     @GetMapping("/assignment")
     public String showAssigmentForm(Model model) {
         model.addAttribute("users", userService.findAll());

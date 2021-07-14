@@ -8,7 +8,7 @@ public class LoginController {
 
     @GetMapping("/login")
     String showLoginForm() {
-        //login form is submitted using POST method <form th:action="@{/login}" method="post">
+        //o login é enviado utilizando o método POST na <form th: action = "@ {/ login}" method = "post"> 
         return "forms/login";
     }
 }

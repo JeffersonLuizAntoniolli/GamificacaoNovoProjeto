@@ -8,6 +8,6 @@ public class IndexController {
 
     @RequestMapping("/")
     String showIndex() {
-        return "index";
+        return "index"; // retorna a pagina inicial
     }
 }
