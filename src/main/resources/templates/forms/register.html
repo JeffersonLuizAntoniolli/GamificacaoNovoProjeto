@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Register</title>
+</head>
+
+<body>
+
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('register')"></th:block> /*/-->
+</header>
+
+<main class="container">
+    <div class="card mb-3">
+
+        <h1 class="my-highest-header card-header">Register new User Account</h1>
+
+        <div class="card card-body">
+            <div class="alert alert-info" th:if="${exist}">
+                <p class="text text-center">
+                    User with this email exists
+                </p>
+            </div>
+
+            <form th:action="@{/register}" th:object="${user}" method="post">
+                <div class="row">
+
+                    <div class="col-sm-9">
+
+                        <div class="form-group">
+                            <label for="email" class="form-control-label">Email</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-at"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control"
+                                       th:field="*{email}" id="email"/>
+                            </div>
+                            <div class="text text-danger"
+                                 th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-control-label">Password</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                                </div>
+                                <input type="password" class="form-control password my-password-input"
+                                       th:field="*{password}" id="password"/>
+                                <div class="input-group-append">
+                                <span class="input-group-text my-append-eye">
+                                    <i class="far fa-eye show-password"></i>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="text text-danger"
+                                 th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="form-control-label">Name</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control"
+                                       th:field="*{name}" id="name"/>
+                            </div>
+                            <div class="text text-danger"
+                                 th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                        </div>
+
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <div class="card card-body mb-3">
+                            <img src="images/user.png" alt="user photo" class="embed-responsive embed-responsive-3by4">
+                            <input type="hidden" class="form-control" id="photo" name="photo"
+                                   th:attr="value = ${'images/user.png'}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+<!--show password when mouse is over eye icon-->
+<script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+main.container {
+    padding: 80px 5px 60px 5px;
+}
+
+.my-highest-header {
+    font-size: 2rem;
+}
+
+.my-second-header {
+    font-size: 1.5rem;
+}
+
+.footer {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    height: 45px;
+    background-color: white;
+    text-align: center;
+}
+
+.error-page-footer {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    width: 100%;
+    height: 45px;
+    text-align: right;
+}
+
+.my-photo-miniature {
+    height: 2.0rem;
+    width: 1.5rem
+}
+
+.my-user-card-photo {
+    max-width: 50%
+}
+
+.my-append-eye {
+    background-color: white;
+    border-left: 0;
+}
+
+.my-password-input {
+    border-right: 0;
+}
+
+.my-link {
+    color: black;
+}
+
+.my-link,
+.my-link:visited,
+.my-link:hover,
+.my-link:active {
+    text-decoration: none;
+}
+
+.my-link:hover {
+    color: black;
+}
+
+.my-check {
+    font-size: 1.5rem;
+}
+
+.my-error-background {
+    background-image: url("../images/error-background.jpg");
+    background-size: cover;
+}
+
+.my-button-selected,
+.my-button-selected:hover,
+.my-button-selected:focus,
+.my-button-selected:active,
+.my-button-selected.active,
+.open > .dropdown-toggle.btn-primary {
+    border: 2px solid #18BC9C;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.20);
+}
+
+table.dataTable thead .sorting_asc {
+    background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat bottom left;
+}
+
+table.dataTable thead .sorting_desc {
+    background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat bottom left;
+}
+
+table.dataTable thead .sorting {
+    background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat bottom left;
+}

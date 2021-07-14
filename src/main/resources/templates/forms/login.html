@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="eng"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Login</title>
+</head>
+
+<body>
+
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('login')"></th:block> /*/-->
+</header>
+
+<main class="container">
+    <div class="card mb-3">
+
+        <h1 class="my-highest-header card-header">Login to User Account</h1>
+
+        <div class="card card-body">
+            <div>
+
+                <div class="alert alert-danger" th:if="${param.error}">
+                    <h2>Invalid Email or Password</h2>
+                </div>
+                <!--Thymeleaf is automatically adding the CSRF token to the form
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                https://docs.spring.io/spring-security/site/docs/current/guides/html5/form-javaconfig.html
+                -->
+                <form th:action="@{/login}" method="post">
+
+                    <div class="form-group">
+                        <label for="email" class="form-control-label">Email</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-at"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control"
+                                   id="email" name="username"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-lock show-password-toggle"></i>
+                                </span>
+                            </div>
+                            <input type="password" class="form-control password my-password-input"
+                                   id="password" name="password"/>
+                            <div class="input-group-append">
+                                <span class="input-group-text my-append-eye">
+                                    <i class="far fa-eye show-password"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Submit" class="btn btn-primary"/>
+                </form>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <div class="row justify-content-start">
+                <div class="col-12 col-md-3 col-sm-6 my-2">Demo accounts:</div>
+
+                <div class="col-12 col-md-3 col-sm-6">
+                    <input type="submit" value="manager - admin" class="btn btn-secondary btn-block my-2"
+                           id="demo-manager-btn"/>
+                </div>
+                <div class="col-12 col-md-3 col-sm-6">
+                    <input type="submit" value="Ann - user" class="btn btn-secondary btn-block my-2" id="demo-ann-btn"/>
+                </div>
+                <div class="col-12 col-md-3 col-sm-6">
+                    <input type="submit" value="Mark - user" class="btn btn-secondary btn-block my-2"
+                           id="demo-mark-btn"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+<!--show password when mouse is over eye icon-->
+<!--demo accounts-->
+<script src="js/main.js"></script>
+
+</body>
+</html>

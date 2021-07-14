@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="eng"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Profile</title>
+</head>
+
+<body>
+
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('profile')"></th:block> /*/-->
+</header>
+
+<main class="container">
+
+    <div class="card mb-3">
+
+        <h1 class="my-highest-header card-header">Profile</h1>
+
+        <div class="card card-body">
+            <div class="row">
+
+                <div class="col-sm-10">
+                    <h2 class="my-second-header" th:text="${user.name}"></h2>
+                    <h2 class="my-second-header" th:text="'email: '+${user.email}"></h2>
+                </div>
+                <div class="col-6 col-sm-2">
+                    <div class="card card-body mb-3 p-2">
+                        <img th:src="${user.photo}" alt="user photo" class="embed-responsive embed-responsive-3by4">
+                    </div>
+                </div>
+            </div>
+
+            <table class="my-tab table text-left">
+
+                <thead class="table-info">
+                <tr>
+                    <th style="width:20%">Task name</th>
+                    <th style="width:50%" class="d-none d-sm-table-cell">Description</th>
+                    <th style="width:16%">Date</th>
+                    <th style="width:7%">Days left</th>
+                    <th style="width:7%">Completed</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="t : ${tasksOwned}">
+
+                    <td class="text-left" th:text="${t.name}"></td>
+                    <td class="text-left d-none d-sm-table-cell" th:text="${t.description}"></td>
+
+                    <td th:text="${#temporals.format(t.date, 'dd-MM-yyyy')}"></td>
+
+                    <!--Days left-->
+                    <td class="text-center col-1">
+                        <!--/*/ <th:block th:include="fragments/days-left-until-deadline :: daysLeft(${t})"></th:block> /*/-->
+                    </td>
+
+                    <!--Completed/In progress-->
+                    <td>
+                        <a th:href="${t.completed} ? ${'/profile/unmark-done/' + t.id} : ${'/profile/mark-done/' + t.id}"
+                           th:class="${t.owner==null} ? 'disabled nav-link my-link' : 'nav-link my-link'"
+                        ><i th:class="${t.completed} ? 'far fa-check-square my-check':'far fa-square my-check'"></i>
+                        </a>
+                    </td>
+
+                </tr>
+
+                <tr th:if="${user.tasksOwned.size()==0}">
+                    <td colspan="5" th:text="${'There are no tasks assigned to '+ user.name}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+<!--remain scroll position after redirect-->
+<script src="js/main.js"></script>
+
+</body>
+</html>

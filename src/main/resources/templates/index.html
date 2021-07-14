@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Gerenciamento de Atividades</title>
+</head>
+
+<body>
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('home')"></th:block> /*/-->
+</header>
+
+<main class="container">
+    <h1 class="display-4">Welcome to Task Manager</h1>
+    <p class="lead">This application will help you get stuff done</p>
+
+    <hr class="my-4">
+    <p>Most features require logging in. Not authorized users have access to the welcome screen and login or registration panel.</p>
+
+    <p>Admin (manager) can:</p>
+    <ul>
+        <li>Create task and assign task to any user</li>
+        <li>View list of all users with possibility to delete user</li>
+        <li>View list of all tasks with editing or deleting task</li>
+    </ul>
+        <p>Common user (employee) can:</p>
+    <ul>
+        <li>Create task only for himself</li>
+        <li>View list of all users with no action allowed</li>
+        <li>View list of all tasks but edit or delete only tasks for which he is responsible</li>
+    </ul>
+
+    <p>Every authorized user can:</p>
+    <ul>
+        <li>View his own profile</li>
+        <li>Switch task as completed/uncompleted</li>
+
+    </ul>
+
+    <h2 class="my-second-header">Test users:</h2>
+    <ul>
+        <li>manager@mail.com, password: 112233</li>
+        <li>ann@mail.com, password: 112233</li>
+        <li>mark@mail.com, password: 112233</li>
+    </ul>
+</main>
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+</body>
+</html>
