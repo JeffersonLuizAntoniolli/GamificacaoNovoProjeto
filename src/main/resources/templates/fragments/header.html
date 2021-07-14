@@ -3,9 +3,10 @@
       xmlns="http://www.thymeleaf.org">
 
 <header th:fragment="header(activeTab)">
-
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-        <a class="navbar-brand mr-4" href="#">Task Manager</a>
+        <a class="navbar-brand mr-4" href="#">Projeto Gamificação</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -14,45 +15,63 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
 
-                <!--Home-->
+                <!--Inicio
                 <li th:class="${activeTab == 'home'}? 'active nav-item mr-4' : 'nav-item mr-4'">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>-->
 
-                <!--Tasks list-->
+                <!--Lista de Atividades-->
                 <li th:class="${activeTab == 'tasks-list'}? 'active nav-item mr-4' : 'nav-item mr-4'"
                     sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/tasks">Tasks List</a>
+                    <a class="nav-link" href="/tasks">Lista de Atividades</a>
                 </li>
 
-                <!--Assign tasks-->
+                <!--Designar Atividades
                 <li th:class="${activeTab == 'assign-tasks'}? 'active nav-item mr-4' : 'nav-item mr-4'"
                     sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="nav-link" href="/assignment">Assign Tasks</a>
-                </li>
+                    <a class="nav-link" href="/assignment">Designar Atividades</a>
+                </li>-->
 
-                <!--Create New Task-->
+                <!--Criar Nova Atividade
                 <li th:class="${activeTab == 'create-new-task'}? 'active nav-item mr-4' : 'nav-item mr-4'"
                     sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/task/create">Create New Task</a>
-                </li>
+                    <a class="nav-link" href="/task/create">Criar Nova Atividade</a>
+                </li>-->
 
-                <!--Users List-->
+                <!--Lista de Usuários-->
                 <li th:class="${activeTab == 'users-list'}? 'active nav-item mr-4' : 'nav-item mr-4'"
                     sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/users">Users List</a>
+                    <a class="nav-link" href="/users">Lista de Usuários</a>
+                </li>
+                
+                <!--Gaming-->
+                <li th:class="${activeTab == 'Gaming'}? 'active nav-item mr-4' : 'nav-item mr-4'"
+                    sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/about">Gaming</a>
+                </li>
+                
+                <!--Loja-->
+                <li th:class="${activeTab == 'Store'}? 'active nav-item mr-4' : 'nav-item mr-4'"
+                    sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/about">Loja</a>
+                </li>
+                
+                <!--Ranking-->
+                <li th:class="${activeTab == 'Ranking'}? 'active nav-item mr-4' : 'nav-item mr-4'"
+                    sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/about">Ranking</a>
                 </li>
 
-                <!--Profile-->
+                <!--Perfil
                 <li th:class="${activeTab == 'profile'}? 'active nav-item mr-4' : 'nav-item mr-4'"
                     sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/profile">Your Profile</a>
-                </li>
+                    <a class="nav-link" href="/profile">Perfil</a>
+                </li>-->
 
-                <!--About-->
+                <!--Sobre
                 <li th:class="${activeTab == 'about'}? 'active nav-item mr-4' : 'nav-item mr-4'">
-                    <a class="nav-link" href="/about">About</a>
-                </li>
+                    <a class="nav-link" href="/about">Sobre</a>
+                </li>-->
             </ul>
 
             <ul class="navbar-nav">
@@ -61,17 +80,17 @@
                 </li>
                 <li th:class="${activeTab == 'register'}? 'active nav-item mr-4' : 'nav-item mr-4'"
                     sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" href="/register">Register</a>
+                    <a class="nav-link" href="/register">Registrar</a>
                 </li>
                 <li th:class="${activeTab == 'login'}? 'active nav-item mr-4' : 'nav-item mr-4'"
                     sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/login">Acessar</a>
                 </li>
                 <li>
                     <form class="form-inline my-2 my-lg-0"
                           th:action="@{logout}" method="post"
                           sec:authorize="isAuthenticated()">
-                        <button class="btn btn-secondary my-2 my-sm-0 mr-4" type="submit">Log out</button>
+                        <button class="btn btn-secondary my-2 my-sm-0 mr-4" type="submit">Sair</button>
                     </form>
                 </li>
             </ul>

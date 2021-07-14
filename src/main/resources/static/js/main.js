@@ -1,4 +1,4 @@
-<!--show password when mouse is over eye icon-->
+/* <!--show password when mouse is over eye icon--> */
 $(".show-password").hover(
     function () {
         $("#password").attr("type", "text").focus();
@@ -19,7 +19,7 @@ $(document).ready(function () {
     }
 });
 
-//DataTable plug-in
+/*DataTable plug-in
 $(document).ready(function () {
     $('#sortableTable').DataTable(
         {
@@ -32,24 +32,31 @@ $(document).ready(function () {
             pageLength: 25
         });
     $('.dataTables_length').addClass('bs-select');
-});
+}); */
 
-//demo accounts
+//Contas para testes
 $(document).ready(function () {
-    $("#demo-manager-btn").click(function () {
+    $("#demo-admin-btn").click(function () {
         $("#email").val("manager@mail.com");
         $("#password").val("112233");
     });
 });
 $(document).ready(function () {
-    $("#demo-ann-btn").click(function () {
-        $("#email").val("ann@mail.com");
+    $("#demo-user-btn").click(function () {
+        $("#email").val("user@mail.com");
         $("#password").val("112233");
     });
 });
 $(document).ready(function () {
-    $("#demo-mark-btn").click(function () {
-        $("#email").val("mark@mail.com");
+    $("#demo-gamemaster-btn").click(function () {
+        $("#email").val("manager@mail.com");
         $("#password").val("112233");
     });
 });
+$(document).ready(function () {
+    $("#demo-gerente-btn").click(function () {
+        $("#email").val("manager@mail.com");
+        $("#password").val("112233");
+    });
+});
+ 

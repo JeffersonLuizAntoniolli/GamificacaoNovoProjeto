@@ -3,8 +3,10 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns="http://www.thymeleaf.org">
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
-    <title>Assign Tasks</title>
+    <title>Acompanhar Atividades</title>
 </head>
 
 <body>
@@ -17,19 +19,19 @@
 
     <div class="card mb-3">
         <div class="card-header">
-            <h1 class="my-highest-header">Assign tasks to user</h1>
+            <h1 class="my-highest-header">Acompanhar Atividades</h1>
         </div>
-        <!--card with all user miniatures, full width--------------------------------------->
+        <!-- cartão com todas as miniaturas do usuário, largura total -------------------------------------- -->
         <div class="card-body">
 
-            <h2 class="my-second-header">Choose user</h2>
+            <h2 class="my-second-header">Escolha o Usuário para Encaminhar às Atividades:</h2>
 
             <div class="card-deck">
                 <div th:each="user:${users}" class="col-12 col-sm-3">
 
                     <a th:href="${'/assignment/' + user.id}" class="btn text-left">
 
-                        <!--user's card is highlighted when selected-->
+                        <!--o cartão do usuário é destacado quando selecionado-->
                         <div class="card mb-3"
                              th:classappend="${selectedUser!=null and selectedUser.id==user.id} ?'my-button-selected'">
                             <div class="row">
@@ -41,7 +43,7 @@
 
                                 <div class="col-7">
                                     <div th:text="${user.name}"></div>
-                                    <small>tasks in progress:</small>
+                                    <small>Atividades Em Progresso:</small>
                                     <div th:if="${user.getTasksInProgress().size() gt 0}"
                                          th:text="${user.getTasksInProgress().size()}">
                                     </div>
@@ -57,74 +59,25 @@
 
             <hr class="my-4">
 
-            <h2 class="my-second-header" th:if="${selectedUser==null}">No user is selected</h2>
+            <h2 class="my-second-header" th:if="${selectedUser==null}">Nenhum usuário selecionado!!</h2>
             <h2 class="my-second-header" th:unless="${selectedUser==null}">
                 <span class="text-success"
-                      th:text="${selectedUser.getName() +' is selected'}">
+                      th:text="${selectedUser.getName() +' foi selecionado!!'}">
                 </span>
             </h2>
 
             <hr class="my-4">
 
-            <!--section active only if user is selected-->
+
+            <!--seção ativa apenas se o usuário for selecionado-->
             <div class="row" th:if="${selectedUser!=null}">
 
-                <!--left card with TASKS assigned to selected user, 1/2 width--------------------------------------->
-                <div class="col-sm-6 col-12">
-                    <div class="card mr-2">
-                        <div class="card-header">
-                            <h2 class="my-second-header"
-                                th:text="'Tasks in Progress ('+${selectedUser.getName()}+' is working on them)'"
-                            ></h2>
-                        </div>
-                        <table class="table table-hover text-left">
-                            <thead class="table-info">
-                            <tr>
-                                <th class="col-sm-6">Task name</th>
-                                <th class="col-sm-4">Days left</th>
-                                <th class="col-sm-2">Action</th>
-                            </tr>
-                            </thead>
-
-                            <!--left table content when user has some tasks in progress-->
-                            <tbody th:if="${selectedUser.getTasksInProgress().size() gt 0}">
-                            <tr th:each="t:${selectedUser.getTasksInProgress()}">
-
-                                <!--Task in progress name-->
-                                <td th:text="${t.name}"></td>
-
-                                <!--Days left-->
-                                <td class="text-center col-1">
-                                    <!--/*/ <th:block th:include="fragments/days-left-until-deadline :: daysLeft(${t})"></th:block> /*/-->
-                                </td>
-
-                                <!--Unassign button-->
-                                <td>
-                                    <a th:href="${'/assignment/unassign/' + selectedUser.getId()+'/'+t.id}"
-                                       class="btn btn-outline-success btn-sm mb-2"
-                                    >Unassign</a>
-                                </td>
-
-                            </tr>
-                            </tbody>
-
-                            <!--left table content when user has no task in progress-->
-                            <tbody th:if="${selectedUser.getTasksInProgress().size() eq 0}">
-                            <tr>
-                                <td th:text="${'There are no tasks assigned to '+selectedUser.getName()}"></td>
-                            </tr>
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div>
-
-                <!--right card with all free TASKS, 1/2 width--------------------------------------->
+				<!--cartão certo com todas as TAREFAS grátis, 1/2 largura--------------------------------------->
                 <div class="col-sm-6 col-12">
                     <div class="card ml-2">
                         <div class="card-header">
                             <h2 class="my-second-header"
-                                th:text="'Free Tasks (assign them to '+${selectedUser.getName()}+')'"
+                                th:text="'Atividades a serem realizadas. Deseja encaminhar para '+${selectedUser.getName()}+'?'"
                             ></h2>
                         </div>
 
@@ -132,41 +85,93 @@
 
                             <thead class="table-secondary">
                             <tr>
-                                <th class="col-sm-6">Task name</th>
-                                <th class="col-sm-4">Days left</th>
-                                <th class="col-sm-2">Action</th>
+                                <th class="col-sm-6">Nome da Atividade</th>
+                                <th class="col-sm-4">Dias Faltando</th>
+                                <th class="col-sm-2">Ação</th>
                             </tr>
                             </thead>
 
-                            <!--right table content there are some free tasks-->
+                            <!--conteúdo de mesa certo, existem algumas atividades a serem encaminhadas-->
                             <tbody>
                             <tr th:each="ft:${freeTasks}" th:unless="${freeTasks.size()==0}">
 
-                                <!--Free task name-->
+                                <!--Nome da atividade disponivel-->
                                 <td th:text="${ft.name}"></td>
 
-                                <!--Days left-->
+                                <!--Dias Faltando-->
                                 <td class="text-center col-1">
                                     <!--/*/ <th:block th:include="fragments/days-left-until-deadline :: daysLeft(${ft})"></th:block> /*/-->
                                 </td>
 
-                                <!--Assign button-->
+                                <!--Botão de Encaminhar-->
                                 <td>
                                     <a th:href="${'/assignment/assign/' + selectedUser.getId()+'/'+ft.id}"
                                        class="btn btn-outline-success btn-sm mb-2"
-                                    >Assign</a>
+                                    >Encaminhar</a>
                                 </td>
                             </tr>
 
-                            <!--right table content there are some free tasks-->
+                            <!--conteúdo de mesa certo, existem algumas tarefas gratuitas-->
                             <tr th:if="${freeTasks.size()==0}">
-                                <td>There are no tasks to assign</td>
+                                <td>Não existem atividades a serem realizadas ou encaminhadas!!</td>
                             </tr>
                             </tbody>
 
                         </table>
                     </div>
                 </div>
+
+                <!--cartão esquerdo com TAREFAS atribuídas ao usuário selecionado, 1/2 largura--------------------------------------->
+                <div class="col-sm-6 col-12">
+                    <div class="card mr-2">
+                        <div class="card-header">
+                            <h2 class="my-second-header"
+                                th:text="'Atividades em Progresso com ' +${selectedUser.getName()}"
+                            ></h2>
+                        </div>
+                        <table class="table table-hover text-left">
+                            <thead class="table-info">
+                            <tr>
+                                <th class="col-sm-6">Nome da Atividade</th>
+                                <th class="col-sm-4">Dias Faltando</th>
+                                <th class="col-sm-2">Ação</th>
+                            </tr>
+                            </thead>
+
+                            <!--deixou o conteúdo da tabela quando o usuário tem algumas tarefas em andamento-->
+                            <tbody th:if="${selectedUser.getTasksInProgress().size() gt 0}">
+                            <tr th:each="t:${selectedUser.getTasksInProgress()}">
+
+                                <!--Nome da Atividade em Progresso-->
+                                <td th:text="${t.name}"></td>
+
+                                <!--Dias Faltando-->
+                                <td class="text-center col-1">
+                                    <!--/*/ <th:block th:include="fragments/days-left-until-deadline :: daysLeft(${t})"></th:block> /*/-->
+                                </td>
+
+                                <!--Botão para retirar encaminhamento-->
+                                <td>
+                                    <a th:href="${'/assignment/unassign/' + selectedUser.getId()+'/'+t.id}"
+                                       class="btn btn-outline-success btn-sm mb-2"
+                                    >Retirar</a>
+                                </td>
+
+                            </tr>
+                            </tbody>
+
+                            <!--deixou o conteúdo da tabela quando o usuário não tem nenhuma tarefa em andamento-->
+                            <tbody th:if="${selectedUser.getTasksInProgress().size() eq 0}">
+                            <tr>
+                                <td th:text="${'Não há atividades encaminhadas para '+selectedUser.getName()}"></td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+                
 
             </div>
 
@@ -178,7 +183,7 @@
     <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
 </footer>
 
-<!--remain scroll position after redirect-->
+<!--permanecer na posição de rolagem após o redirecionamento-->
 <script src="js/main.js"></script>
 
 </body>

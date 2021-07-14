@@ -55,6 +55,7 @@ public class TaskController {
 
     }
 
+    //pagina para criar uma nova atividade
     @GetMapping("/task/create")
     public String showEmptyTaskForm(Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
         String email = principal.getName();
@@ -68,7 +69,9 @@ public class TaskController {
         model.addAttribute("task", task);
         return "forms/task-new";
     }
-
+    
+    
+    //pagina para criar uma nova atividade
     @PostMapping("/task/create")
     public String createTask(@Valid Task task, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

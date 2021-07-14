@@ -3,8 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
-    <title>Register</title>
+    <title>Registro</title>
 </head>
 
 <body>
@@ -16,12 +18,12 @@
 <main class="container">
     <div class="card mb-3">
 
-        <h1 class="my-highest-header card-header">Register new User Account</h1>
+        <h1 class="my-highest-header card-header">Cadastrar Nova Conta</h1>
 
         <div class="card card-body">
             <div class="alert alert-info" th:if="${exist}">
                 <p class="text text-center">
-                    User with this email exists
+                    Email já cadastrado!
                 </p>
             </div>
 
@@ -31,7 +33,7 @@
                     <div class="col-sm-9">
 
                         <div class="form-group">
-                            <label for="email" class="form-control-label">Email</label>
+                            <label for="email" class="form-control-label">Email:</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -46,7 +48,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="form-control-label">Password</label>
+                            <label for="password" class="form-control-label">Senha:</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                             <span class="input-group-text">
@@ -66,7 +68,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="name" class="form-control-label">Name</label>
+                            <label for="name" class="form-control-label">Nome Completo:</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -90,7 +92,7 @@
                     </div>
                 </div>
 
-                <input type="submit" value="Submit" class="btn btn-primary"/>
+                <center><input type="submit" value="Confirmar" class="btn btn-primary"/><center>
             </form>
         </div>
     </div>
@@ -100,7 +102,7 @@
     <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
 </footer>
 
-<!--show password when mouse is over eye icon-->
+<!--Mostra senha quando o usuário passa o mouse no icone do olho-->
 <script src="js/main.js"></script>
 
 </body>

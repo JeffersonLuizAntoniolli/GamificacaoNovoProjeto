@@ -2,6 +2,8 @@
 <html lang="eng"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
     <title>Login</title>
 </head>
@@ -15,22 +17,19 @@
 <main class="container">
     <div class="card mb-3">
 
-        <h1 class="my-highest-header card-header">Login to User Account</h1>
+        <h1 class="my-highest-header card-header">Página de Login:</h1>
 
         <div class="card card-body">
             <div>
 
                 <div class="alert alert-danger" th:if="${param.error}">
-                    <h2>Invalid Email or Password</h2>
+                    <h2>E-mail ou Senha Incorreta!!</h2>
                 </div>
-                <!--Thymeleaf is automatically adding the CSRF token to the form
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                https://docs.spring.io/spring-security/site/docs/current/guides/html5/form-javaconfig.html
-                -->
+                
                 <form th:action="@{/login}" method="post">
 
                     <div class="form-group">
-                        <label for="email" class="form-control-label">Email</label>
+                        <label for="email" class="form-control-label">Email:</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -43,7 +42,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="control-label">Password</label>
+                        <label for="password" class="control-label">Senha:</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -60,25 +59,33 @@
                         </div>
                     </div>
 
-                    <input type="submit" value="Submit" class="btn btn-primary"/>
+                    <center><input type="submit" value="Confirmar" class="btn btn-primary"/></center>
                 </form>
             </div>
         </div>
 
         <div class="card-footer">
             <div class="row justify-content-start">
-                <div class="col-12 col-md-3 col-sm-6 my-2">Demo accounts:</div>
-
-                <div class="col-12 col-md-3 col-sm-6">
-                    <input type="submit" value="manager - admin" class="btn btn-secondary btn-block my-2"
-                           id="demo-manager-btn"/>
+                <div class="col-12 col-md-3 col-sm-6 my-2">Contas Testes:</div>
+				<!-- Usuário com papel de Administrador -->
+                <div class="col-12 col-md-2 col-sm-6">
+                    <input type="submit" value="Administrador" class="btn btn-secondary btn-block my-2"
+                           id="demo-admin-btn"/>
                 </div>
-                <div class="col-12 col-md-3 col-sm-6">
-                    <input type="submit" value="Ann - user" class="btn btn-secondary btn-block my-2" id="demo-ann-btn"/>
+                <!-- Usuário com papel de Colaborador  -->
+                <div class="col-12 col-md-2 col-sm-6">
+                    <input type="submit" value="Colaborador" class="btn btn-secondary btn-block my-2"
+                           id="demo-user-btn"/>
                 </div>
-                <div class="col-12 col-md-3 col-sm-6">
-                    <input type="submit" value="Mark - user" class="btn btn-secondary btn-block my-2"
-                           id="demo-mark-btn"/>
+                <!-- Usuário com papel de GameMaster -->
+                <div class="col-12 col-md-2 col-sm-6">
+                    <input type="submit" value="Game Master" class="btn btn-secondary btn-block my-2"
+                           id="demo-gamemaster-btn"/>
+                </div>
+                <!-- Usuário com papel de Gerente de Projetos -->
+                <div class="col-12 col-md-2 col-sm-6">
+                    <input type="submit" value="Gerente de Projetos" class="btn btn-secondary btn-block my-2"
+                           id="demo-gerente-btn"/>
                 </div>
             </div>
         </div>
@@ -89,8 +96,8 @@
     <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
 </footer>
 
-<!--show password when mouse is over eye icon-->
-<!--demo accounts-->
+<!--Mostrar senha quando mouse passar no icone do olho-->
+<!--Contas Demos-->
 <script src="js/main.js"></script>
 
 </body>
