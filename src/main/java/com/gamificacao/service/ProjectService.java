@@ -20,4 +20,6 @@ public interface ProjectService {
 	    void setProjectCompleted(Long id);
 	    
 	    void setProjectNotCompleted(Long id); 
+	    
+	    Project getProjectById(Long ProjectId); // serviço que busca um projeto pelo seu ID
 }

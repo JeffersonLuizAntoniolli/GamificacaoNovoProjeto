@@ -17,12 +17,12 @@ public class RoleServiceImpl implements RoleService {
         this.roleRepository = roleRepository;
     }
 
-    @Override
+    @Override // Serviço que vai criar um novo papel no sistema
     public Role createRole(Role role) {
         return roleRepository.save(role);
     }
 
-    @Override
+    @Override // serviço que lista todos os Papeis no sistema
     public List<Role> findAll() {
         return roleRepository.findAll();
     }

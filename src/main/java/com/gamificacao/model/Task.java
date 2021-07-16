@@ -15,24 +15,24 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
-    private Long id;
+    private Long id;	// Codigo de identificação no Banco da Atividade
     @NotEmpty(message = "{task.name.not.empty}")
-    private String name;
+    private String name;	// Nome ou Titulo da Atividade
     @NotEmpty(message = "{task.description.not.empty}")
-    @Column(length = 1200)
+    @Column(length = 1200)	
     @Size(max = 1200, message = "{task.description.size}")
-    private String description;
+    private String description; 	// Descrição da Atividade
     @NotNull(message = "{task.date.not.null}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
-    private boolean isCompleted;
-    private String creatorName;
+    private LocalDate date; 		// Data de prazo final da Atividade
+    private boolean isCompleted; // Atividade Foi concluida ou não
+    private String creatorName;  // Usuário Criador da Atividade
     @ManyToOne
     @JoinColumn(name = "OWNER_ID")
-    private User owner;
+    private User owner; // Usuário Responsavel pela Atividade
     @ManyToOne
     @JoinColumn(name = "PROJECT_ID")
-    private Project project;
+    private Project project; 	// Projeto a qual atividade vai estar vinculada
     public long daysLeftUntilDeadline(LocalDate date) {
         return ChronoUnit.DAYS.between(LocalDate.now(), date);
     }

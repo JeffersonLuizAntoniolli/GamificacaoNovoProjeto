@@ -57,5 +57,10 @@ public class ProjectServiceImpl implements ProjectService{
 	        project.setCompleted(false);
 	        projectRepository.save(project);
 	}
+
+	@Override
+	public Project getProjectById(Long id) {
+		return projectRepository.findById(id).orElse(null);
+	}
 	
 }

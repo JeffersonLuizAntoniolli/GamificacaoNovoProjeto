@@ -7,25 +7,25 @@ import com.gamificacao.model.User;
 
 public interface TaskService {
 
-    void createTask(Task task);
+    void createTask(Task task); // serviço para criar uma nova atividade no sistema
+ 
+    void updateTask(Long id, Task task); // serviço para editar dados de uma atividade já cadastrada sistema
 
-    void updateTask(Long id, Task task);
+    void deleteTask(Long id);  // serviço para deletar uma atividade no sistema
 
-    void deleteTask(Long id);
+    List<Task> findAll();  // serviço para listar todas as atividades do sistema
 
-    List<Task> findAll();
+    List<Task> findByOwnerOrderByDateDesc(User user); // Lista de atividades que busca pelo usuário e lista em data no formato descrecente
 
-    List<Task> findByOwnerOrderByDateDesc(User user);
+    void setTaskCompleted(Long id); // serviço que vai marcar uma atividade como concluida
 
-    void setTaskCompleted(Long id);
+    void setTaskNotCompleted(Long id);  // serviço que vai desmarcar uma atividade que estava concluida para ser concluida novamente
 
-    void setTaskNotCompleted(Long id);
+    List<Task> findFreeTasks(); // serviço que lista todas atividades sem um usuário responsavel para ser encaminhado
 
-    List<Task> findFreeTasks();
+    Task getTaskById(Long taskId); // serviço que busca uma atividade pelo seu ID
 
-    Task getTaskById(Long taskId);
+    void assignTaskToUser(Task task, User user); // serviço que faz a função de encaminhar a atividade para um usuario no sistema
 
-    void assignTaskToUser(Task task, User user);
-
-    void unassignTask(Task task);
+    void unassignTask(Task task); // serviço que faz a função de retirar o responsavel da atividade para possa ser encaminhada para outro usuário 
 }

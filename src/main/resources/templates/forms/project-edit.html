@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
-    <title>Editar Atividade</title>
+    <title>Editar Projeto</title>
 </head>
 
 <body>
@@ -18,16 +18,16 @@
 <main class="container">
     <div class="card mb-3">
 
-        <h1 class="my-highest-header card-header">Editar Atividade</h1>
+        <h1 class="my-highest-header card-header">Editar Projeto</h1>
 
         <div class="card card-body">
 
-            <form th:action="@{'/task/edit/'+ ${task.id}}" th:object="${task}" method="post">
+            <form th:action="@{'/project/edit/'+ ${project.id}}" th:object="${project}" method="post">
                 <input type="hidden" th:field="*{id}"/>
 
-                <!--Nome da Atividade-->
+                <!--Nome do Projeto-->
                 <div class="form-group">
-                    <label for="name" class="form-control-label">Nome da Atividade:</label>
+                    <label for="name" class="form-control-label">Nome do Projeto:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-pen"></i></span>
@@ -40,19 +40,8 @@
 
                     </div>
                 </div>
-
-                <!--Descrição da Atividade-->
-                <div class="form-group">
-                    <label for="description" class="form-control-label">Descrição da Atividade</label>
-                    <textarea class="form-control"
-                              th:field="*{description}" id="description">  </textarea>
-                    <div class="text text-danger"
-                         th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
-
-                    </div>
-                </div>
-
-                <!--Data Final da Atividade-->
+              
+                <!--Data Final do Projeto-->
                 <div class="form-group">
                     <label for="date" class="form-control-label">Data:</label>
                     <div class="input-group mb-3">

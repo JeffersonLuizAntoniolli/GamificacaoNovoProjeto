@@ -63,7 +63,7 @@ public class TaskController {
 
         Task task = new Task();
         task.setCreatorName(user.getName());
-        if (request.isUserInRole("ROLE_USER")) {
+        if (request.isUserInRole("ROLE_USER")) { // Se o Usuário for o proprio colaborador, atividade vai designar ele mesmo como responsavel pela atividade criada
             task.setOwner(user);
         }
         model.addAttribute("task", task);

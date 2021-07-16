@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Criar Novo Projeto</title>
+</head>
+
+<body>
+
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('create-new-task')"></th:block> /*/-->
+</header>
+
+<main class="container">
+    <div class="card mb-3">
+
+        <h1 class="my-highest-header card-header">Criar Novo Projeto</h1>
+
+        <div class="card card-body">
+            <form th:action="@{/project/create}" th:object="${project}" method="post">
+                <input type="hidden" th:field="*{creatorName}"/>
+
+                <!--Nome-->
+                <div class="form-group">
+                    <label for="name" class="form-control-label">Nome do Projeto</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-pen"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control"
+                               th:field="*{name}" id="name"/>
+                    </div>
+                    <div class="text text-danger"
+                         th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+
+                <!--Data-->
+                <div class="form-group">
+                    <label for="date" class="form-control-label">Data</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="date" class="form-control"
+                               th:attr="value=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')},
+                                    min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                               th:field="*{date}" id="date"/>
+                    </div>
+
+                    <div class="text text-danger"
+                         th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+                </div>
+
+                <center><input type="submit" value="Confirmar" class="btn btn-primary"/></center>
+            </form>
+        </div>
+    </div>
+</main>
+
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+</body>
+</html>

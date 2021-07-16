@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @Override
+    @Override  // Serviço para criar um novo usuário no sistema
     public User createUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByRole(USER);
@@ -43,34 +43,34 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    @Override
+    @Override //Serviço para mudar o papel do usuario para Administrador do Sistema
     public User changeRoleToAdmin(User user) {
         Role adminRole = roleRepository.findByRole(ADMIN);
         user.setRoles(new ArrayList<>(Collections.singletonList(adminRole)));
         return userRepository.save(user);
     }
 
-    @Override
-    public List<User> findAll() {
+    @Override // Serviço para listar todos os usuarios do sistema
+    public List<User> findAll() { 
         return userRepository.findAll();
     }
 
-    @Override
+    @Override  //Serviço para Consultar usuário por seu Email
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    @Override
-    public boolean isUserEmailPresent(String email) {
+    @Override //Serviço para verificar se o email já existente em algum outro usuário no sistema
+    public boolean isUserEmailPresent(String email) { 
         return userRepository.findByEmail(email) != null;
     }
 
-    @Override
+    @Override  //Serviço para Consultar usuário pelo ID
     public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
-    @Override
+    @Override //Serviço para Deletar Usuário do Sistema
     public void deleteUser(Long id) {
         User user = userRepository.getOne(id);
         user.getTasksOwned().forEach(task -> task.setOwner(null));

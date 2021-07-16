@@ -19,12 +19,12 @@ public class TaskServiceImpl implements TaskService {
         this.taskRepository = taskRepository;
     }
 
-    @Override
+    @Override // serviço para criar uma nova atividade no sistema
     public void createTask(Task task) {
         taskRepository.save(task);
     }
 
-    @Override
+    @Override  // serviço para editar dados de uma atividade já cadastrada sistema
     public void updateTask(Long id, Task updatedTask) {
         Task task = taskRepository.getOne(id);
         task.setName(updatedTask.getName());
@@ -33,36 +33,36 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
     }
 
-    @Override
+    @Override // serviço para deletar uma atividade no sistema
     public void deleteTask(Long id) {
         taskRepository.deleteById(id);
     }
 
-    @Override
+    @Override // serviço para listar todas as atividades do sistema
     public List<Task> findAll() {
         return taskRepository.findAll();
     }
 
-    @Override
+    @Override // Lista de atividades que busca pelo usuário e lista em data no formato descrecente
     public List<Task> findByOwnerOrderByDateDesc(User user) {
         return taskRepository.findByOwnerOrderByDateDesc(user);
     }
 
-    @Override
+    @Override  // serviço que vai marcar uma atividade como concluida
     public void setTaskCompleted(Long id) {
         Task task = taskRepository.getOne(id);
         task.setCompleted(true);
         taskRepository.save(task);
     }
 
-    @Override
+    @Override  // serviço que vai desmarcar uma atividade que estava concluida para ser concluida novamente
     public void setTaskNotCompleted(Long id) {
         Task task = taskRepository.getOne(id);
         task.setCompleted(false);
         taskRepository.save(task);
     }
 
-    @Override
+    @Override // serviço que lista todas atividades sem um usuário responsavel para ser encaminhado
     public List<Task> findFreeTasks() {
         return taskRepository.findAll()
                 .stream()
@@ -71,18 +71,18 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
-    @Override
+    @Override  // serviço que busca uma atividade pelo seu ID
     public Task getTaskById(Long id) {
         return taskRepository.findById(id).orElse(null);
     }
 
-    @Override
+    @Override  // serviço que faz a função de encaminhar a atividade para um usuario no sistema
     public void assignTaskToUser(Task task, User user) {
         task.setOwner(user);
         taskRepository.save(task);
     }
 
-    @Override
+    @Override // serviço que faz a função de retirar o responsavel da atividade para possa ser encaminhada para outro usuário 
     public void unassignTask(Task task) {
         task.setOwner(null);
         taskRepository.save(task);
