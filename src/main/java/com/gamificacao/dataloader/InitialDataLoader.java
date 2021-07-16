@@ -8,9 +8,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import com.gamificacao.model.Project;
 import com.gamificacao.model.Role;
 import com.gamificacao.model.Task;
 import com.gamificacao.model.User;
+import com.gamificacao.service.ProjectService;
 import com.gamificacao.service.RoleService;
 import com.gamificacao.service.TaskService;
 import com.gamificacao.service.UserService;
@@ -20,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
-
+	private ProjectService projectService;
     private UserService userService;
     private TaskService taskService;
     private RoleService roleService;
@@ -36,11 +38,12 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     @Value("${default.admin.image}")
     private String defaultAdminImage;
 
-    @Autowired
-    public InitialDataLoader(UserService userService, TaskService taskService, RoleService roleService) {
+    @Autowired //Metodo Construtor Initial DataLoader
+    public InitialDataLoader(UserService userService, TaskService taskService, RoleService roleService, ProjectService projectService) {
         this.userService = userService;
         this.taskService = taskService;
         this.roleService = roleService;
+        this.projectService = projectService;
     }
 
     @Override
@@ -110,29 +113,40 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                 .map(u -> "saved user: " + u.getName())
                 .forEach(logger::info);
 
-
-        //Atividades --------------------------------------------------------------------------------------------------------
-
+        //Projetos --------------------------------------------------------------------------------------------------------
+        
         LocalDate today = LocalDate.now();
+        //1
+        
+        Project project = projectService.createProject(new Project(
+        		"Primeiro Projeto Teste",
+        		today,
+        		true,
+        		userService.getUserByEmail("manager@mail.com").getName()
+        ));
+        
+        //Atividades --------------------------------------------------------------------------------------------------------
 
         //1
         taskService.createTask(new Task(
-                "Collect briefing document ",
-                "Setup first meeting with client. Collect basic data about the client. Define and collect briefing document from client.",
+                "Primeira Atividade Teste",
+                "Primeira Descrição Atividade Teste.",
                 today.minusDays(40),
                 true,
                 userService.getUserByEmail("user@mail.com").getName(),
-                userService.getUserByEmail("user@mail.com")
+                userService.getUserByEmail("user@mail.com"),
+                project
         ));
 
      //   2
         taskService.createTask(new Task(
-                "Define project questionnaire ",
-                "Define and send project questionnaire to the client and wait for the client’s response. Iterate on doubts you have until everybody is in agreement. Finalize project questionnaire from client.",
+                "Segunda Atividade Teste ",
+                "Segunda Descrição Atividade Teste.",
                 today.minusDays(30),
                 true,
                 userService.getUserByEmail("manager@mail.com").getName(),
-                userService.getUserByEmail("manager@mail.com")
+                userService.getUserByEmail("manager@mail.com"),
+                project
         ));
 
 //        //3

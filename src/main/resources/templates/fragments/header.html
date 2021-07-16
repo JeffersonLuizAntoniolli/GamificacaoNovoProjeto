@@ -25,6 +25,12 @@
                     sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/tasks">Lista de Atividades</a>
                 </li>
+                
+                 <!--Lista de Projetos-->
+                <li th:class="${activeTab == 'projects-list'}? 'active nav-item mr-4' : 'nav-item mr-4'"
+                    sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/projects">Lista de Projetos</a>
+                </li>
 
                 <!--Designar Atividades
                 <li th:class="${activeTab == 'assign-tasks'}? 'active nav-item mr-4' : 'nav-item mr-4'"

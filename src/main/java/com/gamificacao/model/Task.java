@@ -30,7 +30,9 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "OWNER_ID")
     private User owner;
-
+    @ManyToOne
+    @JoinColumn(name = "PROJECT_ID")
+    private Project project;
     public long daysLeftUntilDeadline(LocalDate date) {
         return ChronoUnit.DAYS.between(LocalDate.now(), date);
     }
@@ -42,12 +44,14 @@ public class Task {
                 @NotEmpty @Size(max = 1200) String description,
                 @NotNull LocalDate date,
                 boolean isCompleted,
-                String creatorName) {
+                String creatorName,
+                Project project) {
         this.name = name;
         this.description = description;
         this.date = date;
         this.isCompleted = isCompleted;
         this.creatorName = creatorName;
+        this.project = project;
     }
 
     public Task(@NotEmpty String name,
@@ -55,13 +59,15 @@ public class Task {
                 @NotNull LocalDate date,
                 boolean isCompleted,
                 String creatorName,
-                User owner) {
+                User owner,
+                Project project) {
         this.name = name;
         this.description = description;
         this.date = date;
         this.isCompleted = isCompleted;
         this.creatorName = creatorName;
         this.owner = owner;
+        this.project = project;
     }
 
     public Long getId() {

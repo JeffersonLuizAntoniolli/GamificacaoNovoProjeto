@@ -17,7 +17,7 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     private static final String ADMIN="ADMIN";
     private static final String USER="USER";
-
+    
     private UserRepository userRepository;
     private TaskRepository taskRepository;
     private RoleRepository roleRepository;

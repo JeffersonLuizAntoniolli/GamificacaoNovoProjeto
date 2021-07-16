@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org"
+      lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Lista de Projetos</title>
+</head>
+
+<body>
+
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('tasks-list')"></th:block> /*/-->
+</header>
+
+<main class="container">
+    <div class="card mb-3">
+
+        <h1 class="my-highest-header card-header">Lista de Projetos
+        	<!-- Mostrar ou Ocultar Atividades-->
+           <!--  <span th:unless="${onlyInProgress}">
+                <a href="/tasks/in-progress" class="btn btn-outline-info btn-lg float-right">Ocultar Concluidos!</a>
+            </span> -->
+           <!--  <span th:if="${onlyInProgress}">
+                <a href="/assignment" class="btn btn-outline-info btn-lg float-right">Mostrar Todos!</a>
+            </span> -->
+            <!-- <span sec:authorize="isAuthenticated()">
+                <a href="/task/create" class="btn btn-outline-info btn-lg float-right">Criar Nova Atividade</a>
+            </span> -->
+        </h1> 
+		
+        <div class="card card-body">
+            <table id="sortableTable" class="my-tab table table-hover text-center"
+                   style="table-layout: fixed; width: 100%;">
+
+                <thead class="table-primary">
+                <tr>
+                    <th style="width:30%" class="text-left">Nome do Projeto</th>
+                    <th style="width:10%">Prazo Final</th>
+                    <th style="width:10%" class="d-none d-lg-table-cell">DeadLine</th>
+                    <th style="width:12%">Finalizado?</th>
+                    <th style="width:11%" class="d-none d-lg-table-cell">Criador</th>
+                    <th style="width:16%" class="d-none d-lg-table-cell" colspan="2">Ações</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+				<!--  th:with="isThisOneSigned=${t.owner!=null ? t.owner.equals(signedUser) : false}" -->
+            <tr th:each="t : ${projects}"
+                    th:if="${!onlyInProgress or !t.completed}">
+                    <!--Nome da tarefa e link de descrição-->
+               <td class="text-left">
+                        <span>
+                            <a 
+                               th:href="${'/project/' + t.id}"
+                               class="nav-link my-link px-1 d-inline"
+                               th:text="${t.name}+' '"
+                            ></a>
+                            <a data-toggle="modal" data-target="#modal-details"
+                               th:attr="data-target='#modal-details'+${t.id}"
+                               th:href="${'/project/' + t.id}"
+                               class="btn-link d-inline"
+                            >
+                            <small class="badge badge-light">Detalhar!</small>
+                            </a>
+
+                        </span>
+                    </td> 
+                    
+                    <!--Data-->
+                    <td th:text="${#temporals.format(t.date, 'dd-MM-yyyy')}"
+                        th:data-order="${t.date}"
+                    ></td>
+
+                    <!--Dias Faltando -->
+                    <td class="text-center col-1 d-none d-lg-table-cell"
+                        th:data-order="${t.date}">
+                       
+                   </td> 
+
+                    <!--projetos finalizadas ou em andamento-->
+                     <td th:data-order="${t.completed} ? 1 : 0"
+                        th:if="${isAdminSigned}">
+                        <a th:href="${t.completed} ? ${'/project/unmark-done/' + t.id} : ${'/project/mark-done/' + t.id}"
+                           th:class="'nav-link my-link'"
+                        ><i th:class="${t.completed} ? 'far fa-check-square my-check':'far fa-square my-check'"></i>
+                        </a>
+                    </td> 
+
+                     <td th:data-order="${t.completed} ? 1 : 0"
+                        th:unless="${isAdminSigned}">
+                        <span data-toggle="tooltip" data-placement="top" data-html="true"
+                              title="Apenas o admin do projeto pode marcar-las como concluídas ou não">
+                            <a th:href="${t.completed} ? ${'/project/unmark-done/' + t.id} : ${'/project/mark-done/' + t.id}"
+                               class="disabled nav-link my-link"
+                            ><i th:class="${t.completed} ? 'far fa-check-square my-check':'far fa-square my-check'"></i>
+                            </a>
+                        </span>
+                    </td> 
+
+                    <!--criador do projeto-->
+                   <td th:text="${t.creatorName}" class="d-none d-lg-table-cell"></td>
+
+                   <!--  botão editar -->
+                    <td th:if="${isAdminSigned}" class="d-none d-lg-table-cell">
+                        <a th:href="${'/project/edit/' + t.id}" class="btn btn-outline-success btn-sm">Editar</a>
+                    </td>
+
+                    <td th:unless="${isAdminSigned}" class="d-none d-lg-table-cell">
+                        <span data-toggle="tooltip" data-placement="top" data-html="true"
+                              title="Apenas o Adm pode editar o projeto">
+                        <a th:href="${'/project/edit/' + t.id}" class="btn btn-outline-secondary btn-sm disabled">Editar</a>
+                        </span>
+                    </td> 
+
+                    <!--botão deletar-->
+                   <td th:if="${isAdminSigned}" class="d-none d-lg-table-cell">
+                        <a data-toggle="modal" data-target="#modal-delete"
+                           th:attr="data-target='#modal-delete'+${t.id}"
+                           th:href="${'/project/delete/' + t.id}"
+                           class="btn btn-outline-danger btn-sm">Deletar
+                        </a>
+                    </td> 
+
+                     <td th:unless="${isAdminSigned}" class="d-none d-lg-table-cell">
+                        <span data-toggle="tooltip" data-placement="top" data-html="true"
+                              title="Apenas o Adm pode deletar o projeto">
+                        <a href="" class="btn btn-outline-secondary btn-sm disabled">Deletar</a>
+                    </span>
+                    </td> 
+
+                    <!--modal para confirmação de exclusão-->
+                    <div class="modal" th:id="modal-delete+${t.id }">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title text-danger">Confirmar Exclusão</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p th:text="${'Tem certeza que desejar deletar a atividade: &quot '+t.name+'&quot?'}"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                        Cancelar
+                                    </button>
+                                    <a th:href="${'/project/delete/' + t.id}">
+                                        <span class="btn btn-danger">Deletar</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!--fim do modal para confirmação de exclusão-->
+
+                </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+<!--DataTable plug-in-->
+<!--remain scroll position after redirect-->
+<script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-/* <!--show password when mouse is over eye icon--> */
+/* <!--mostra a senha quando passa o mouse no icone do olho--> */
 $(".show-password").hover(
     function () {
         $("#password").attr("type", "text").focus();
