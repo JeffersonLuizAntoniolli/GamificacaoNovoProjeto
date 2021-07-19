@@ -25,8 +25,8 @@
             <div class="row">
 
                 <div class="col-sm-10">
-                    <h2 class="my-second-header" th:text="${user.name}"></h2>
-                    <h2 class="my-second-header" th:text="'email: '+${user.email}"></h2>
+                    <h2 class="my-second-header" th:text="'Nome: '+${user.name}"></h2>
+                    <h2 class="my-second-header" th:text="'Email: '+${user.email}"></h2>
                 </div>
                 <div class="col-6 col-sm-2">
                     <div class="card card-body mb-3 p-2">
@@ -71,7 +71,7 @@
                 </tr>
 
                 <tr th:if="${user.tasksOwned.size()==0}">
-                    <td colspan="5" th:text="${'There are no tasks assigned to '+ user.name}"></td>
+                    <td colspan="5" th:text="${'Sem atividades encaminhadas para '+ user.name}"></td>
                 </tr>
                 </tbody>
             </table>

@@ -13,12 +13,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() { // Serviço responsavel para criar criptografia da senha
         return new BCryptPasswordEncoder(10);
     }
 
     @Bean
-    public MessageSource messageSource() {
+    public MessageSource messageSource() { // Serviço que auxilia na padronizaçao da criação da senha
         ReloadableResourceBundleMessageSource bean = new ReloadableResourceBundleMessageSource();
         bean.setBasename("classpath:messages");
         bean.setDefaultEncoding("UTF-8");
@@ -26,14 +26,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public LocalValidatorFactoryBean validator() {
+    public LocalValidatorFactoryBean validator() { // Serviços que realizam validação de autencidade
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
 
     @Override
-    public Validator getValidator() {
+    public Validator getValidator() { // Serviços que realizam validação de autencidade
         return validator();
     }
 

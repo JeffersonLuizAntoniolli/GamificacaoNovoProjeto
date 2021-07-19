@@ -36,25 +36,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**")
-                .permitAll()
+                .permitAll() // Acesso liberado para todos sem necessidade acesso, ou seja, acessa de forma publica 
 
                 .antMatchers("/profile/**", "/tasks/**", "/task/**", "/users", "/user/**", "/h2-console/**", "/projects/**")
-                .hasAnyRole("USER, ADMIN, GAMEMASTER")
+                .hasAnyRole("USER, ADMIN, GAMEMASTER") // Permetir somente os acessos das paginas acima para os três papeis criados para execução do projetos
 
-                .antMatchers("/assignment/**")
-                .hasAnyRole("ADMIN")
-
+                .antMatchers("/assignment/**") 
+                .hasAnyRole("ADMIN") // Permetir somente os acessos das paginas acima para usuário com papel Admin (Gerente de Projetos)
+                
+                .antMatchers("/items/**", "/ranking/**", "/affinitys/**")
+                .hasAnyRole("GAMEMASTER") // Permetir somente os acessos das paginas acima para usuário com papel GameMaster
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login") // Pagina de Login
                 .permitAll()
-                .defaultSuccessUrl("/profile")
+                .defaultSuccessUrl("/profile") // Se login ocorrer corretamente, cair na pagina de perfil do usuário logado
 
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login");
+                .logoutSuccessUrl("/login"); // Quando sair de uma conta logada, cair sempre nessa pagina
 
-        http.csrf().ignoringAntMatchers("/h2-console/**");
+        http.csrf().ignoringAntMatchers("/h2-console/**"); // Paginas que serão ignorados qualquer tipo de restrição que será feito
         http.headers().frameOptions().sameOrigin();
     }
 

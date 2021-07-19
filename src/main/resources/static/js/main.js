@@ -49,14 +49,8 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     $("#demo-gamemaster-btn").click(function () {
-        $("#email").val("manager@mail.com");
+        $("#email").val("gamemaster@mail.com");
         $("#password").val("112233");
     });
 });
-$(document).ready(function () {
-    $("#demo-gerente-btn").click(function () {
-        $("#email").val("manager@mail.com");
-        $("#password").val("112233");
-    });
-});
- 
+

@@ -58,10 +58,10 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
         //Papeis --------------------------------------------------------------------------------------------------------
-        roleService.createRole(new Role("ADMIN"));
-        roleService.createRole(new Role("USER"));
-        roleService.createRole(new Role("GAMEMASTER"));
-        roleService.findAll().stream().map(role -> "saved role: " + role.getRole()).forEach(logger::info);
+        roleService.createRole(new Role("ADMIN")); // Ao iniciar o projeto, será criado o Papel de Admin (Gerente de Projetos) com o usuário de acesso na sequência
+        roleService.createRole(new Role("USER")); // Ao iniciar o projeto, será criado o Papel de Colaborador com um usuário de acesso na sequência
+        roleService.createRole(new Role("GAMEMASTER")); // Ao iniciar o projeto, será criado o Papel de Game Master com o usuário de acesso na sequência
+        roleService.findAll().stream().map(role -> "Papel Salvo: " + role.getRole()).forEach(logger::info);
 
         //Usuários Iniciais --------------------------------------------------------------------------------------------------------
         //1 - Admin (Root) ou Usuário do Banco
@@ -89,6 +89,14 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                 "112233",
                 "images/user.png"));
 
+        //4 - Usuário GameMaster Teste
+        userService.createUser(new User(
+                "gamemaster@mail.com",
+                "gamemaster",
+                "112233",
+                "images/admin.png"));
+
+        
         userService.findAll().stream()
                 .map(u -> "saved user: " + u.getName())
                 .forEach(logger::info);
@@ -149,11 +157,11 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         		(long) 30
         ));
 
-        taskService.findAll().stream().map(t -> "saved task: '" + t.getName()
-                + "' for owner: " + getOwnerNameOrNoOwner(t)).forEach(logger::info);
+        taskService.findAll().stream().map(t -> "Atividade Salva: '" + t.getName()
+                + "' Para o Responsavel: " + getOwnerNameOrNoOwner(t)).forEach(logger::info);
     }
 
     private String getOwnerNameOrNoOwner(Task task) {
-        return task.getOwner() == null ? "no owner" : task.getOwner().getName();
+        return task.getOwner() == null ? "Sem Responsavel" : task.getOwner().getName();
     }
 }
