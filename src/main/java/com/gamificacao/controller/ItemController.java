@@ -51,7 +51,7 @@ public class ItemController {
             return "forms/item-new";
         }
         itemService.createItem(item);
-        return "redirect:/items/";
+        return "redirect:/items";
     }
     // Vai apresentar a pagina de edição do item
     @GetMapping("/item/edit/{id}")
@@ -67,7 +67,7 @@ public class ItemController {
         }
         itemService.updateItem(id, item);
         item = itemService.getItemById(id);
-        return "redirect:/items/";
+        return "redirect:/items";
     }
 
     @GetMapping("/item/delete/{id}")

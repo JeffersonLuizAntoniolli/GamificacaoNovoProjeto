@@ -1,18 +1,22 @@
 package com.gamificacao.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gamificacao.model.Task;
 import com.gamificacao.model.User;
 import com.gamificacao.repository.TaskRepository;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import com.gamificacao.repository.UserRepository;
 
 @Service
 public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public TaskServiceImpl(TaskRepository taskRepository) {
@@ -53,6 +57,16 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskRepository.getOne(id);
         task.setCompleted(true);
         taskRepository.save(task);
+        User user = task.getOwner();
+        if(user != null && user.getId()!=null) {
+        	if(user.getExperience()!=null) {
+        		user.setExperience(user.getExperience()+1);
+        	}else {
+        		user.setExperience(1);
+        	}
+        	userRepository.save(user);
+        }
+        
     }
 
     @Override  // serviço que vai desmarcar uma atividade que estava concluida para ser concluida novamente
@@ -60,6 +74,16 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskRepository.getOne(id);
         task.setCompleted(false);
         taskRepository.save(task);
+        User user = task.getOwner();
+        
+        if(user != null && user.getId()!=null) {
+        	if(user.getExperience()!=null && user.getExperience() > 0) {
+        		user.setExperience(user.getExperience()-1);
+        	}else {
+        		user.setExperience(0);
+        	}
+        	userRepository.save(user);
+        }
     }
 
     @Override // serviço que lista todas atividades sem um usuário responsavel para ser encaminhado

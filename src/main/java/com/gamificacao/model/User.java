@@ -27,6 +27,8 @@ public class User {
     private String password;
     @Column(columnDefinition = "VARCHAR(255) DEFAULT 'images/user.png'")
     private String photo;
+    @Column
+    private Integer experience;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Task> tasksOwned;
 
@@ -154,4 +156,12 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, email, name, password, photo, tasksOwned, roles);
     }
+
+	public Integer getExperience() {
+		return experience;
+	}
+
+	public void setExperience(Integer experience) {
+		this.experience = experience;
+	}
 }

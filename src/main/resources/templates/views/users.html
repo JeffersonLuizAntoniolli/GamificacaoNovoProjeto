@@ -73,11 +73,11 @@
                     <td th:if="${user.getTasksCompleted().size()==0}" class="d-none d-md-table-cell">0</td>
                     
                     <!--botão editar-->
-                    <td th:if="${isAdminSigned or isThisOneSigned}" class="d-none d-lg-table-cell">
+                    <td th:if="${isAdminSigned}" class="d-none d-lg-table-cell">
                         <a th:href="${'/user/edit/' + user.id}" class="btn btn-outline-success btn-sm">Editar</a>
                     </td>
 
-                    <td th:unless="${isAdminSigned or isThisOneSigned}" class="d-none d-lg-table-cell">
+                    <td th:unless="${isAdminSigned}" class="d-none d-lg-table-cell">
                         <span data-toggle="tooltip" data-placement="top" data-html="true"
                               title="Apenas o Administrador pode atualizar os dados dos colaboradores">
                         <a th:href="${'/user/edit/' + user.id}" class="btn btn-outline-secondary btn-sm disabled">Editar</a>
