@@ -53,7 +53,7 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Override
 	public void setProjectNotCompleted(Long id) {
-		  Project project = projectRepository.getOne(id);
+		    Project project = projectRepository.getOne(id);
 	        project.setCompleted(false);
 	        projectRepository.save(project);
 	}

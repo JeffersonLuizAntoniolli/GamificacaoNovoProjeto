@@ -16,14 +16,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
-    @Email(message = "{user.email.not.valid}")
-    @NotEmpty(message = "{user.email.not.empty}")
+    @Email(message = "{Email do Usuário precisa ser valido}")
+    @NotEmpty(message = "{Precisa ser cadastrado um email para o Usuário}")
     @Column(unique = true)
     private String email;
-    @NotEmpty(message = "{user.name.not.empty}")
+    @NotEmpty(message = "{Precisa ser cadastrado o nome completo do Usuário}")
     private String name;
-    @NotEmpty(message = "{user.password.not.empty}")
-    @Length(min = 5, message = "{user.password.length}")
+    @NotEmpty(message = "{Precisa ser cadastrado uma para o Usuário}")
+    @Length(min = 5, message = "{A senha precisa ter no minimo 5 digitos}")
     private String password;
     @Column(columnDefinition = "VARCHAR(255) DEFAULT 'images/user.png'")
     private String photo;

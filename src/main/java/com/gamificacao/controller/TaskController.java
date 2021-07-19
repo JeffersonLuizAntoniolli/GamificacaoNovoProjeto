@@ -64,7 +64,7 @@ public class TaskController {
         Task task = new Task();
         task.setCreatorName(user.getName());
         if (request.isUserInRole("ROLE_USER")) { // Se o Usuário for o proprio colaborador, atividade vai designar ele mesmo como responsavel pela atividade criada
-            task.setOwner(user);
+            task.setOwner(user); 	// Caso a atividade não seja, será criado atividade sem um responsavel, nesse o Admin encaminha a atividade para um colaborador
         }
         model.addAttribute("task", task);
         return "forms/task-new";
@@ -78,8 +78,7 @@ public class TaskController {
             return "forms/task-new";
         }
         taskService.createTask(task);
-
-        return "redirect:/tasks";
+        return "redirect:/project-tasks/"+task.getProject().getId();
     }
     // Vai apresentar a pagina de edição da atividade
     @GetMapping("/task/edit/{id}")
@@ -94,25 +93,29 @@ public class TaskController {
             return "forms/task-edit";
         }
         taskService.updateTask(id, task);
-        return "redirect:/tasks";
+        task = taskService.getTaskById(id);
+        return "redirect:/project-tasks/"+task.getProject().getId();
     }
 
     @GetMapping("/task/delete/{id}")
-    public String deleteTask(@PathVariable Long id) {
+    public String deleteTask(@PathVariable Long id) {     
+        Task task = taskService.getTaskById(id);
         taskService.deleteTask(id);
-        return "redirect:/tasks";
+        return "redirect:/project-tasks/"+task.getProject().getId();
     }
 
     @GetMapping("/task/mark-done/{id}")
     public String setTaskCompleted(@PathVariable Long id) {
         taskService.setTaskCompleted(id);
-        return "redirect:/tasks";
+        Task task = taskService.getTaskById(id);
+        return "redirect:/project-tasks/"+task.getProject().getId();
     }
 
     @GetMapping("/task/unmark-done/{id}")
     public String setTaskNotCompleted(@PathVariable Long id) {
         taskService.setTaskNotCompleted(id);
-        return "redirect:/tasks";
+        Task task = taskService.getTaskById(id);
+        return "redirect:/project-tasks/"+task.getProject().getId();
     }
 
 }

@@ -16,11 +16,11 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private Long id;	// Codigo de identificação no Banco da Atividade
-    @NotEmpty(message = "{task.name.not.empty}")
+    @NotEmpty(message = "{Precisa ser cadastrado um nome para a Atividade}")
     private String name;	// Nome ou Titulo da Atividade
-    @NotEmpty(message = "{task.description.not.empty}")
+    @NotEmpty(message = "{Precisa ser cadastrado uma descrição sobre oque vai ser a Atvididade}")
     @Column(length = 1200)	
-    @Size(max = 1200, message = "{task.description.size}")
+    @Size(max = 1200, message = "{Limite de caracteres é de 1200}")
     private String description; 	// Descrição da Atividade
     @NotNull(message = "{task.date.not.null}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -30,6 +30,7 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "OWNER_ID")
     private User owner; // Usuário Responsavel pela Atividade
+    //@NotNull(message = "{task.project.not.null}")
     @ManyToOne
     @JoinColumn(name = "PROJECT_ID")
     private Project project; 	// Projeto a qual atividade vai estar vinculada
@@ -70,7 +71,15 @@ public class Task {
         this.project = project;
     }
 
-    public Long getId() {
+    public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public Long getId() {
         return id;
     }
 

@@ -2,6 +2,7 @@ package com.gamificacao.service;
 
 import java.util.List;
 
+import com.gamificacao.model.Project;
 import com.gamificacao.model.User;
 
 public interface UserService {
@@ -18,4 +19,6 @@ public interface UserService {
     User getUserById(Long userId);//Serviço para Consultar usuário pelo ID
  
     void deleteUser(Long id); //Serviço para Deletar Usuário do Sistema
+    
+    void updateUser(Long id, User user); //Serviço para atualizar o perfil Usuário do Sistema
 }

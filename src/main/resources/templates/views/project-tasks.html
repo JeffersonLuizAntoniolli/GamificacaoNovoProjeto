@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
-    <title>Lista de Atividades</title>
+    <title>Lista de Atividades do Projeto</title>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
                 <a href="/assignment" class="btn btn-outline-info btn-lg float-right">Designar Atividades</a>
             </span>
             <span sec:authorize="isAuthenticated()">
-                <a href="/task/create" class="btn btn-outline-info btn-lg float-right">Criar Nova Atividade</a>
+                <a th:href="${'/project/'+project.id+'/task/create/'}" class="btn btn-outline-info btn-lg float-right">Criar Nova Atividade</a>
             </span>
         </h1>
 		
@@ -40,20 +40,19 @@
 
                 <thead class="table-primary">
                 <tr>
-                    <th style="width:30%" class="text-left">Nome da Atividade</th>
+                    <th style="width:25%" class="text-left">Nome da Atividade</th>
                     <th style="width:10%">Prazo Final</th>
-                    <th style="width:10%" class="d-none d-lg-table-cell">Projeto</th>
-                    <th style="width:12%">Finalizado?</th>
-                    <th style="width:11%" class="d-none d-lg-table-cell">Responsável</th>
-                    <th style="width:11%" class="d-none d-lg-table-cell">Criador</th>
-                    <th style="width:16%" class="d-none d-lg-table-cell" colspan="2">Ações</th>
+                    <th style="width:20%" class="d-none d-lg-table-cell">Projeto</th>
+                    <th style="width:10%">Finalizado?</th>
+                    <th style="width:20%" class="d-none d-lg-table-cell">Responsável</th>
+                    <th style="width:15%" class="d-none d-lg-table-cell" colspan="2">Ações</th>
                 </tr>
 
                 </thead>
 
                 <tbody>
 
-                <tr th:each="t : ${tasks}"
+                <tr th:each="t : ${project.tasks}"
                     th:if="${!onlyInProgress or !t.completed}"
                     th:with="isThisOneSigned=${t.owner!=null ? t.owner.equals(signedUser) : false}"
                 >
@@ -137,7 +136,7 @@
                     <!--Dias Faltando-->
                     <td class="text-center col-1 d-none d-lg-table-cell"
                         th:text="${t.project.name}">
-                    </td>
+                    </td> 
 
                     <!--Atividades finalizadas ou em andamento-->
                     <td th:data-order="${t.completed} ? 1 : 0"
@@ -165,10 +164,7 @@
                     </td>
 
                     <td class="text-center" th:unless="${t.owner!=null}">-</td>
-
-                    <!--criador da atividade-->
-                    <td th:text="${t.creatorName}" class="d-none d-lg-table-cell"></td>
-
+                    
                     <!--botão editar-->
                     <td th:if="${isAdminSigned or isThisOneSigned}" class="d-none d-lg-table-cell">
                         <a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Editar</a>
@@ -176,7 +172,7 @@
 
                     <td th:unless="${isAdminSigned or isThisOneSigned}" class="d-none d-lg-table-cell">
                         <span data-toggle="tooltip" data-placement="top" data-html="true"
-                              title="Only task owner or admin can edit this task">
+                              title="Apenas o colaborador responsavel ou administrador pode realizar alterações na atividade">
                         <a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-secondary btn-sm disabled">Editar</a>
                         </span>
                     </td>

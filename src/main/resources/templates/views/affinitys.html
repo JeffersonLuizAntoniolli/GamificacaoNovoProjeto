@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org"
+      lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Lista de Afinidades</title>
+</head>
+
+<body>
+
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('affinitys-list')"></th:block> /*/-->
+</header>
+
+<main class="container">
+    <div class="card mb-3">
+
+        <h1 class="my-highest-header card-header">Lista de Afinidades
+        	 <span>
+                <a href="/affinity/create" class="btn btn-outline-info btn-lg float-right">Criar uma Nova Afinidade</a>
+            </span> 
+        </h1>
+		
+        <div class="card card-body">
+            <table id="sortableTable" class="my-tab table table-hover text-center"
+                   style="table-layout: fixed; width: 100%;">
+
+                <thead class="table-primary">
+                <tr>
+                    <th style="width:20%" class="text-left">Nome da Afinidade</th>
+                    <th style="width:65%" class="text-left">Descrição da Afinidade</th>
+                    <th style="width:15%" class="d-none d-lg-table-cell" colspan="2">Ações</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="t : ${affinitys}">          
+                    <!--Nome da afinidade e link de descrição-->
+                    <td th:text="${t.name}" class="d-none d-lg-table-cell"></td>
+                   <!-- <td class="text-left">
+                        <span>
+                           <a data-toggle="modal" data-target="#modal-details"
+                               th:attr="data-target='#modal-details'+${t.id}"
+                               th:href="${'/affinity/' + t.id}"
+                               class="nav-link my-link px-1 d-inline"
+                               th:text="${t.name}+' '"
+                            ></a>
+                              <a data-toggle="modal" data-target="#modal-details"
+                               th:attr="data-target='#modal-details'+${t.id}"
+                               th:href="${'/affinity/' + t.id}"
+                               class="btn-link d-inline"
+                            >
+                           <small class="badge badge-light">Detalhar!</small> 
+                            </a>
+
+                        </span>
+                    </td>--> 
+                    
+                    <!--Descrição da afinidade -->
+                    <td th:text="${t.description}" class="d-none d-lg-table-cell"></td>
+                    
+                    <!--botão editar-->
+                    <td class="d-none d-lg-table-cell">
+                        <a th:href="${'/affinity/edit/' + t.id}" class="btn btn-outline-success btn-sm">Editar</a>
+                    </td>
+
+                 <!--    <td class="d-none d-lg-table-cell">
+                        <span data-toggle="tooltip" data-placement="top" data-html="true"
+                              title="Only affinity owner or admin can edit this affinity">
+                        <a th:href="${'/affinity/edit/' + t.id}" class="btn btn-outline-secondary btn-sm disabled">Editar</a>
+                        </span>
+                    </td> -->
+
+                    <!--botão deletar-->
+                    <td class="d-none d-lg-table-cell">
+                        <a data-toggle="modal" data-target="#modal-delete"
+                           th:attr="data-target='#modal-delete'+${t.id}"
+                           th:href="${'/affinity/delete/' + t.id}"
+                           class="btn btn-outline-danger btn-sm">Deletar
+                        </a>
+                    </td>
+
+                    <!-- <td class="d-none d-lg-table-cell">
+                        <span data-toggle="tooltip" data-placement="top" data-html="true"
+                              title="Apenas o adm pode remover essa afinidade do sistema">
+                        <a href="" class="btn btn-outline-secondary btn-sm disabled">Deletar</a>
+                    </span>
+                    </td> -->
+
+                    <!--modal para confirmação de exclusão-->
+                    <div class="modal" th:id="modal-delete+${t.id }">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title text-danger">Confirmar Exclusão</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p th:text="${'Tem certeza que desejar deletar está afinidade: &quot '+t.name+'&quot?'}"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                        Cancelar
+                                    </button>
+                                    <a th:href="${'/affinity/delete/' + t.id}">
+                                        <span class="btn btn-danger">Deletar</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--fim do modal para confirmação de exclusão-->
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+<!--DataTable plug-in-->
+<!--remain scroll position after redirect-->
+<script src="js/main.js"></script>
+
+</body>
+</html>

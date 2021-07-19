@@ -55,12 +55,12 @@
 
                     <td th:text="${#temporals.format(t.date, 'dd-MM-yyyy')}"></td>
 
-                    <!--Days left-->
+                    <!--Dias Faltando da Atividade-->
                     <td class="text-center col-1">
                         <!--/*/ <th:block th:include="fragments/days-left-until-deadline :: daysLeft(${t})"></th:block> /*/-->
                     </td>
 
-                    <!--Completed/In progress-->
+                    <!--Atividade Completa ou Em progresso-->
                     <td>
                         <a th:href="${t.completed} ? ${'/profile/unmark-done/' + t.id} : ${'/profile/mark-done/' + t.id}"
                            th:class="${t.owner==null} ? 'disabled nav-link my-link' : 'nav-link my-link'"

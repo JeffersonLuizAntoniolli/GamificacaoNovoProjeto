@@ -32,7 +32,7 @@ public class ProjectController {
 	        this.taskService = taskService;
 	        this.userService = userService;
 	        this.projectService = projectService;
-	    }
+	 }
 	
 	 @GetMapping("/projects")
 	 public String listTasks(Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
@@ -48,7 +48,7 @@ public class ProjectController {
 
 	        model.addAttribute("projects", projectService.findAll());
 	       // model.addAttribute("users", userService.findAll());
-	     //  model.addAttribute("signedUser", principal);
+	       //  model.addAttribute("signedUser", principal);
 	       model.addAttribute("isAdminSigned", isAdminSigned);
 	}
 	 
@@ -66,7 +66,9 @@ public class ProjectController {
     
     @GetMapping("/project/delete/{id}")
     public String deleteProject(@PathVariable Long id) {
-        projectService.deleteProject(id);
+    	if(projectService.getProjectById(id).getTasks().size() == 0) {
+    		projectService.deleteProject(id);
+    	}
         return "redirect:/projects";
     }
     
@@ -97,4 +99,45 @@ public class ProjectController {
         model.addAttribute("project", project);
         return "forms/project-new";
     }
+    
+    @PostMapping("/project/create")
+    public String createTask(@Valid Project project, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "forms/project-new";
+        }
+        projectService.createProject(project);
+
+        return "redirect:/projects";
+    }
+    
+    @GetMapping("/project-tasks/{id}") // Serviço para listar as atividades do projeto quando selecionado
+    public String detailproject (@PathVariable Long id, Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
+    	String email = principal.getName();
+        User signedUser = userService.getUserByEmail(email);
+        boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN");
+    	
+    	model.addAttribute("project", projectService.getProjectById(id));
+    	model.addAttribute("onlyInProgress", false);
+        model.addAttribute("signedUser", signedUser);
+        model.addAttribute("isAdminSigned", isAdminSigned);
+    	return "views/project-tasks";
+    }
+    
+    //pagina para criar uma nova atividade com projeto já definido
+    @GetMapping("/project/{id}/task/create/")
+    public String showEmptyTaskForm(@PathVariable Long id, Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+
+        Task task = new Task();
+        task.setCreatorName(user.getName());
+        if (request.isUserInRole("ROLE_USER")) { // Se o Usuário for o proprio colaborador, atividade vai designar ele mesmo como responsavel pela atividade criada
+            task.setOwner(user);
+        }
+        task.setProject(new Project(id)); // serviço que já vai adicionar codigo do projeto para atividade quando ela for criada em project-tasks
+        model.addAttribute("task", task);
+        return "forms/task-new";
+    }
+    
+    
 }

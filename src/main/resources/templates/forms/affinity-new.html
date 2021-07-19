@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
-    <title>Criar Novo Projeto</title>
+    <title>Criar Nova Afinidade</title>
 </head>
 
 <body>
@@ -18,15 +18,14 @@
 <main class="container">
     <div class="card mb-3">
 
-        <h1 class="my-highest-header card-header">Criar Novo Projeto</h1>
+        <h1 class="my-highest-header card-header">Criar Nova Afinidade</h1>
 
         <div class="card card-body">
-            <form th:action="@{/project/create}" th:object="${project}" method="post">
-                <input type="hidden" th:field="*{creatorName}"/>
+            <form th:action="@{/affinity/create}" th:object="${affinity}" method="post">
 
                 <!--Nome-->
                 <div class="form-group">
-                    <label for="name" class="form-control-label">Nome do Projeto</label>
+                    <label for="name" class="form-control-label">Nome do Afinidade:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
@@ -39,28 +38,20 @@
                     <div class="text text-danger"
                          th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                 </div>
-
-                <!--Data-->
+                
+                <!--Descrição da Afinidade-->
                 <div class="form-group">
-                    <label for="date" class="form-control-label">Data</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
-                        </div>
-                        <input type="date" class="form-control"
-                               th:attr="value=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')},
-                                    min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
-                               th:field="*{date}" id="date"/>
-                    </div>
-
+                    <label for="description" class="form-control-label">Descrição da Afinidade:</label>
+                    <textarea class="form-control"
+                              th:field="*{description}" id="description">  </textarea>
                     <div class="text text-danger"
-                         th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+                         th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+
+                    </div>
                 </div>
 
                 <input type="submit" value="Confirmar" class="btn btn-primary"/>
-                <a href="/projects" type="reset" class="btn btn-outline-primary pull-right ml-3">Cancelar</a>
+                <a href="/affinitys" type="reset" class="btn btn-outline-primary pull-right ml-3">Cancelar</a>
             </form>
         </div>
     </div>

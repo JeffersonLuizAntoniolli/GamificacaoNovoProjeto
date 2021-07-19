@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.gamificacao.model.Project;
 import com.gamificacao.model.Role;
 import com.gamificacao.model.Task;
 import com.gamificacao.model.User;
@@ -76,6 +77,16 @@ public class UserServiceImpl implements UserService {
         user.getTasksOwned().forEach(task -> task.setOwner(null));
         userRepository.delete(user);
     }
+
+	@Override // Serviço que vai fazer atualização das informações basicas de perfil do usuario
+	public void updateUser(Long id, User updatedUser) {
+		User user = userRepository.getOne(id);
+        user.setName(updatedUser.getName());
+//        user.setEmail(updatedUser.getEmail());
+//        user.setPassword(updatedUser.getPassword());
+//        user.setPhoto(updatedUser.getPhoto());
+        userRepository.save(user);
+	}
 
 }
 

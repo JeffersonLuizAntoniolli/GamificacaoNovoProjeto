@@ -6,28 +6,28 @@
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
-    <title>Editar Projeto</title>
+    <title>Editar Item</title>
 </head>
 
 <body>
 
 <header>
-    <!--/*/ <th:block th:include="fragments/header :: header('create-new-task')"></th:block> /*/-->
+    <!--/*/ <th:block th:include="fragments/header :: header('create-new-Item')"></th:block> /*/-->
 </header>
 
 <main class="container">
     <div class="card mb-3">
 
-        <h1 class="my-highest-header card-header">Editar Projeto</h1>
+        <h1 class="my-highest-header card-header">Editar Item</h1>
 
         <div class="card card-body">
 
-            <form th:action="@{'/project/edit/'+ ${project.id}}" th:object="${project}" method="post">
+            <form th:action="@{'/item/edit/'+ ${item.id}}" th:object="${item}" method="post">
                 <input type="hidden" th:field="*{id}"/>
 
-                <!--Nome do Projeto-->
+                <!--Nome do Item-->
                 <div class="form-group">
-                    <label for="name" class="form-control-label">Nome do Projeto:</label>
+                    <label for="name" class="form-control-label">Nome do Item:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-pen"></i></span>
@@ -40,28 +40,32 @@
 
                     </div>
                 </div>
-              
-                <!--Data Final do Projeto-->
+
+                <!--Descrição do Item-->
                 <div class="form-group">
-                    <label for="date" class="form-control-label">Data:</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                        </div>
-                        <input type="date" class="form-control"
-                               th:attr="value=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')},
-                                    min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
-                               th:field="*{date}" id="date"/>
-                    </div>
+                    <label for="description" class="form-control-label">Descrição do Item:</label>
+                    <textarea class="form-control"
+                              th:field="*{description}" id="description">  </textarea>
                     <div class="text text-danger"
-                         th:if="${#fields.hasErrors('date')}" th:errors="*{date}">
+                         th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+
+                    </div>
+                </div>
+                
+                <!--Custo do Item-->
+                <div class="form-group">
+                    <label for="cost" class="form-control-label">Custo do Item:</label>
+                    <textarea class="form-control"
+                              th:field="*{cost}" id="cost">  </textarea>
+                    <div class="text text-danger"
+                         th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}">
 
                     </div>
                 </div>
 
                 <input type="submit" value="Confirmar" class="btn btn-primary"/>
                 <button type="reset" class="btn btn-outline-primary pull-right ml-3">Restaurar</button>
-                <a href="/projects" type="reset" class="btn btn-outline-primary pull-right ml-3">Cancelar</a>
+                <a href="/items" type="reset" class="btn btn-outline-primary pull-right ml-3">Cancelar</a>
             </form>
         </div>
     </div>
@@ -69,7 +73,7 @@
 
 
 <footer class="footer">
-    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+  
 </footer>
 
 </body>

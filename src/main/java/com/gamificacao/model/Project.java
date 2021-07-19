@@ -24,13 +24,13 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_id")
     private Long id;
-    @NotEmpty(message = "{project.name.not.empty}")
+    @NotEmpty(message = "{Precisa ser cadastrado um nome para o Projeto}")
     private String name;
-    @NotNull(message = "{project.date.not.null}")
+    @NotNull(message = "{Precisa ser cadastrado uma data limite para o Projeto}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     private boolean isCompleted;
-    private String creatorName;
+    private String creatorName; // usuario que criou do Projeto
     @OneToMany(mappedBy = "project", cascade = CascadeType.REFRESH)
     private List<Task> tasks;
 
@@ -60,6 +60,10 @@ public class Project {
         this.date = date;
         this.isCompleted = isCompleted;
         this.creatorName = creatorName;
+    }
+    
+    public Project(Long id) {
+    	this.id = id;
     }
     
     public List<Task> getTasks() {

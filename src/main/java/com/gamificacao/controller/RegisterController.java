@@ -21,13 +21,13 @@ public class RegisterController {
     public RegisterController(UserService userService) {
         this.userService = userService;
     }
-    // Metodo Get para realizar cadastro de um novo colaborador
+    // Metodo que vai habilitar a pagina para realizar cadastro de um novo colaborador
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
         return "forms/register";
     }
-    // Metodo Post para realizar cadastro de um novo colaborador
+    // Metodo Post qeu vai redirecionar para pagina da lista de usuários
     @PostMapping("/register")
     public String registerUser(@Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

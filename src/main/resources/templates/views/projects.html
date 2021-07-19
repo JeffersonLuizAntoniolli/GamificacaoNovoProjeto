@@ -25,7 +25,7 @@
            <!--  <span th:if="${onlyInProgress}">
                 <a href="/assignment" class="btn btn-outline-info btn-lg float-right">Mostrar Todos!</a>
             </span> -->
-            <span sec:authorize="isAuthenticated()">
+            <span sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="/project/create" class="btn btn-outline-info btn-lg float-right">Criar Novo Projeto</a>
             </span> 
         </h1> 
@@ -54,18 +54,10 @@
                <td class="text-left">
                         <span>
                             <a 
-                               th:href="${'/project/' + t.id}"
+                               th:href="${'/project-tasks/' + t.id}"
                                class="nav-link my-link px-1 d-inline"
                                th:text="${t.name}+' '"
                             ></a>
-                            <a data-toggle="modal" data-target="#modal-details"
-                               th:attr="data-target='#modal-details'+${t.id}"
-                               th:href="${'/project/' + t.id}"
-                               class="btn-link d-inline"
-                            >
-                            <small class="badge badge-light">Detalhar!</small>
-                            </a>
-
                         </span>
                     </td> 
                     
@@ -143,6 +135,9 @@
                                 </div>
                                 <div class="modal-body">
                                     <p th:text="${'Tem certeza que desejar deletar a atividade: &quot '+t.name+'&quot?'}"></p>
+                                </div>
+                                <div class="modal-body">
+                                <p th:text="${'OBS: Para excluir um projeto, antes é necessário remover suas atividades.'}"></p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
