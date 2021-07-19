@@ -100,6 +100,18 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         userService.findAll().stream()
                 .map(u -> "saved user: " + u.getName())
                 .forEach(logger::info);
+        
+      //Afinidades Iniciais --------------------------------------------------------------------------------------------------------
+
+        Affinity suporte = affinityService.createAffinity(new Affinity(
+        		"Atividades de Suporte",
+        		"Está afinidade é acumulo de experiências com todos os tipos de atividades de Suporte, tais como atendimento ao cliente, resolução de duvidas, entre outros"	
+        ));
+        
+        Affinity desenvolvimento = affinityService.createAffinity(new Affinity(
+        		"Atividades de Desenvolvimento",
+        		"Está afinidade é acumulo de experiências com todos os tipos de atividades de Desenvolvimento, tais como programar codigos, corrigir bugs, examinar codigo-fonte, entre outros"	
+        ));
 
         //Projetos Tutoriais --------------------------------------------------------------------------------------------------------
         
@@ -123,7 +135,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                 true,
                 userService.getUserByEmail("user@mail.com").getName(),
                 userService.getUserByEmail("user@mail.com"),
-                project
+                project,
+                suporte   
         ));
 
      //   2
@@ -134,20 +147,12 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                 true,
                 userService.getUserByEmail("manager@mail.com").getName(),
                 userService.getUserByEmail("manager@mail.com"),
-                project
-        ));
-        
-      //Afinidades Iniciais --------------------------------------------------------------------------------------------------------
+                project,
+                desenvolvimento
 
-        affinityService.createAffinity(new Affinity(
-        		"Atividades de Suporte",
-        		"Está afinidade é acumulo de experiências com todos os tipos de atividades de Suporte, tais como atendimento ao cliente, resolução de duvidas, entre outros"	
         ));
         
-        affinityService.createAffinity(new Affinity(
-        		"Atividades de Desenvolvimento",
-        		"Está afinidade é acumulo de experiências com todos os tipos de atividades de Desenvolvimento, tais como programar codigos, corrigir bugs, examinar codigo-fonte, entre outros"	
-        ));
+      
         
       //Itens Iniciais --------------------------------------------------------------------------------------------------------
 

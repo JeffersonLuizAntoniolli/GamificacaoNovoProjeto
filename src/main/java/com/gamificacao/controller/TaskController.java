@@ -1,5 +1,9 @@
 package com.gamificacao.controller;
 
+import java.security.Principal;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
@@ -9,19 +13,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.gamificacao.model.Affinity;
 import com.gamificacao.model.Task;
 import com.gamificacao.model.User;
+import com.gamificacao.service.AffinityService;
 import com.gamificacao.service.TaskService;
 import com.gamificacao.service.UserService;
-
-import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 public class TaskController {
 
     private TaskService taskService;
     private UserService userService;
+    @Autowired // instancia no metodo construtor para o objetivo não ficar nulo e não precisar colocar manualmente
+    private AffinityService affinityService;
 
     @Autowired
     public TaskController(TaskService taskService, UserService userService) {
@@ -60,7 +65,7 @@ public class TaskController {
     public String showEmptyTaskForm(Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
-
+        model.addAttribute("affinitys", affinityService.findAll());
         Task task = new Task();
         task.setCreatorName(user.getName());
         if (request.isUserInRole("ROLE_USER")) { // Se o Usuário for o proprio colaborador, atividade vai designar ele mesmo como responsavel pela atividade criada

@@ -53,7 +53,7 @@
 
                 <!--Data-->
                 <div class="form-group">
-                    <label for="date" class="form-control-label">Data</label>
+                    <label for="date" class="form-control-label">Data:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
@@ -68,6 +68,15 @@
 
                     <div class="text text-danger"
                          th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+                </div>
+                
+                <!--Afinidade-->
+                <div class="form-group">
+                    <label for="affinity" class="form-control-label">Afinidade:</label>
+                    <select class="form-control" th:field="*{affinity}" id="affinity">
+                    	<option th:each="i : ${affinitys}" th:value="${i}" th:text="${i.name}">
+                    	</option>
+                    </select>	
                 </div>
 
                 <input type="submit" value="Confirmar" class="btn btn-primary"/>

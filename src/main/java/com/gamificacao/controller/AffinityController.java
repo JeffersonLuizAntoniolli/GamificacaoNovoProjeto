@@ -51,7 +51,7 @@ public class AffinityController {
             return "forms/affinity-new";
         }
         affinityService.createAffinity(affinity);
-        return "redirect:/affinitys/";
+        return "redirect:/affinitys";
     }
     // Vai apresentar a pagina de edição da atividade
     @GetMapping("/affinity/edit/{id}")
@@ -67,7 +67,7 @@ public class AffinityController {
         }
         affinityService.updateAffinity(id, affinity);
         affinity = affinityService.getAffinityById(id);
-        return "redirect:/affinitys/";
+        return "redirect:/affinitys";
     }
 
     @GetMapping("/affinity/delete/{id}")

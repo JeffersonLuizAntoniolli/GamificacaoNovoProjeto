@@ -21,4 +21,5 @@ public interface UserService {
     void deleteUser(Long id); //Serviço para Deletar Usuário do Sistema
     
     void updateUser(Long id, User user); //Serviço para atualizar o perfil Usuário do Sistema
+   
 }

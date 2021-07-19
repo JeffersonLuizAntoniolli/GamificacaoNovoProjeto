@@ -66,7 +66,6 @@ public class TaskServiceImpl implements TaskService {
         	}
         	userRepository.save(user);
         }
-        
     }
 
     @Override  // serviço que vai desmarcar uma atividade que estava concluida para ser concluida novamente

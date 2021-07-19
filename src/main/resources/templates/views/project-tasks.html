@@ -18,13 +18,13 @@
     <div class="card mb-3">
 
         <h1 class="my-highest-header card-header">Lista de Atividades
-        	<!-- Mostrar ou Ocultar Atividades -->
+        	<!-- Mostrar ou Ocultar Atividades 
             <span th:unless="${onlyInProgress}">
-                <a href="/tasks/in-progress" class="btn btn-outline-info btn-lg float-right">Ocultar Concluidas!</a>
+                <a href="/project-tasks/in-progress" class="btn btn-outline-info btn-lg float-right">Ocultar Concluidas!</a>
             </span>
             <span th:if="${onlyInProgress}">
                 <a href="/assignment" class="btn btn-outline-info btn-lg float-right">Mostrar Todas!</a>
-            </span>
+            </span>-->
             <!-- Fim para Mostrar ou Ocultar Atividades -->
            <span sec:authorize="hasAnyRole('ROLE_ADMIN')">
                 <a href="/assignment" class="btn btn-outline-info btn-lg float-right">Designar Atividades</a>

@@ -37,7 +37,10 @@ public class Task {
     public long daysLeftUntilDeadline(LocalDate date) {
         return ChronoUnit.DAYS.between(LocalDate.now(), date);
     }
-
+    @ManyToOne
+    @JoinColumn(name = "AFFINITY_ID")
+    private Affinity affinity; // Afinidade a qual atividade vai estar vinculada
+    
     public Task() {
     }
 
@@ -46,13 +49,15 @@ public class Task {
                 @NotNull LocalDate date,
                 boolean isCompleted,
                 String creatorName,
-                Project project) {
+                Project project,
+                Affinity affinity) {
         this.name = name;
         this.description = description;
         this.date = date;
         this.isCompleted = isCompleted;
         this.creatorName = creatorName;
         this.project = project;
+        this.affinity = affinity;
     }
 
     public Task(@NotEmpty String name,
@@ -61,7 +66,8 @@ public class Task {
                 boolean isCompleted,
                 String creatorName,
                 User owner,
-                Project project) {
+                Project project,
+                Affinity affinity) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -69,6 +75,7 @@ public class Task {
         this.creatorName = creatorName;
         this.owner = owner;
         this.project = project;
+        this.affinity = affinity;
     }
 
     public Project getProject() {
@@ -153,4 +160,12 @@ public class Task {
     public int hashCode() {
         return Objects.hash(id, name, description, date, isCompleted, creatorName, owner);
     }
+
+	public Affinity getAffinity() {
+		return affinity;
+	}
+
+	public void setAffinity(Affinity affinity) {
+		this.affinity = affinity;
+	}
 }

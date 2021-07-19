@@ -7,7 +7,7 @@ import com.gamificacao.model.User;
 
 public interface AffinityService {
 
-    void createAffinity(Affinity affinity); // serviço para criar uma nova afinidades no sistema
+    Affinity createAffinity(Affinity affinity); // serviço para criar uma nova afinidades no sistema
  
     void updateAffinity(Long id, Affinity affinity); // serviço para editar dados de uma afinidades já cadastrada sistema
 

@@ -22,8 +22,8 @@ public class AffinityServiceImpl implements AffinityService {
     }
     
 	@Override
-	public void createAffinity(Affinity affinity) {
-		affinityRepository.save(affinity);
+	public Affinity createAffinity(Affinity affinity) {
+		return affinityRepository.save(affinity);
 	}
 
 	@Override
