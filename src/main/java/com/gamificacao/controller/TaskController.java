@@ -65,12 +65,12 @@ public class TaskController {
     public String showEmptyTaskForm(Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
-        model.addAttribute("affinitys", affinityService.findAll());
         Task task = new Task();
         task.setCreatorName(user.getName());
         if (request.isUserInRole("ROLE_USER")) { // Se o Usuário for o proprio colaborador, atividade vai designar ele mesmo como responsavel pela atividade criada
             task.setOwner(user); 	// Caso a atividade não seja, será criado atividade sem um responsavel, nesse o Admin encaminha a atividade para um colaborador
         }
+        model.addAttribute("affinitys", affinityService.findAll());
         model.addAttribute("task", task);
         return "forms/task-new";
     }
@@ -89,6 +89,7 @@ public class TaskController {
     @GetMapping("/task/edit/{id}")
     public String showFilledTaskForm(@PathVariable Long id, Model model) {
         model.addAttribute("task", taskService.getTaskById(id));
+        model.addAttribute("affinitys", affinityService.findAll());
         return "forms/task-edit";
     }
  // Vai salvar os dados alterados e voltar a pagina de listagem da atividade

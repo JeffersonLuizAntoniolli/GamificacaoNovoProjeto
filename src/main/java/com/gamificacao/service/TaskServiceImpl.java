@@ -34,6 +34,7 @@ public class TaskServiceImpl implements TaskService {
         task.setName(updatedTask.getName());
         task.setDescription(updatedTask.getDescription());
         task.setDate(updatedTask.getDate());
+        task.setAffinity(updatedTask.getAffinity());
         taskRepository.save(task);
     }
 

@@ -69,6 +69,17 @@
 
                     </div>
                 </div>
+                <!--Afinidade-->
+                <div class="form-group">
+                    <label for="affinity" class="form-control-label">Afinidade:</label>
+                    <select class="form-control" th:field="*{affinity}" id="affinity">
+                    	<option 
+                    		th:each="i : ${affinitys}" 
+                    		th:value="${i.id}" 
+                    		th:text="${i.name}">
+                    	</option>
+                    </select>	
+                </div>
 
                 <input type="submit" value="Confirmar" class="btn btn-primary"/>
                 <button type="reset" class="btn btn-outline-primary pull-right ml-3">Restaurar</button>
