@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.gamificacao.model.Task;
 import com.gamificacao.model.User;
+import com.gamificacao.model.UserAffinity;
 import com.gamificacao.repository.TaskRepository;
+import com.gamificacao.repository.UserAffinityRepository;
 import com.gamificacao.repository.UserRepository;
 
 @Service
@@ -17,6 +19,9 @@ public class TaskServiceImpl implements TaskService {
     
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private UserAffinityRepository userAffinityRepository;
 
     @Autowired
     public TaskServiceImpl(TaskRepository taskRepository) {
@@ -67,6 +72,22 @@ public class TaskServiceImpl implements TaskService {
         	}
         	userRepository.save(user);
         }
+        if(task.getAffinity()!=null) {
+        	UserAffinity userAffinity = 
+        				userAffinityRepository.findByForeignKeysId(
+        											task.getAffinity().getId(), 
+        											user.getId()); 
+        	if(userAffinity == null) {
+        		userAffinity = new UserAffinity();
+        		userAffinity.setAffinity(task.getAffinity());
+        		userAffinity.setUser(user);
+        		userAffinity.setExperience(1);
+        	}else {
+        		userAffinity.setExperience(userAffinity.getExperience()+1);
+        	}
+    		userAffinityRepository.save(userAffinity);
+        }
+        
     }
 
     @Override  // serviço que vai desmarcar uma atividade que estava concluida para ser concluida novamente
