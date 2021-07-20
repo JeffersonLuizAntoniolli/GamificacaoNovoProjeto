@@ -1,5 +1,8 @@
 package com.gamificacao.controller;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.gamificacao.model.Project;
 import com.gamificacao.model.User;
 import com.gamificacao.service.UserService;
 
@@ -59,9 +61,16 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @RequestMapping("user/uploadavatar")
+    @GetMapping("user/uploadavatar") // Serviço para realizar o upload da Imagem
     public String UploadAvatar(Model model) {
     	return "forms/uploadavatar";
     }
     
+	/*
+	 * @PostMapping("user/uploadavatar/upload") // Serviço para realizar o upload da
+	 * Imagem public String upload(Model model, @ResquestParam("files")
+	 * MultipartFile[] files) { StringBuilder fileNames = new StringBuilder();
+	 * for(MultipartFile file : files) { Path fileNameAndPath =
+	 * Paths.get(uploadDirectory); fileNames.append(file.getOriginalFilename()); } }
+	 */
 }

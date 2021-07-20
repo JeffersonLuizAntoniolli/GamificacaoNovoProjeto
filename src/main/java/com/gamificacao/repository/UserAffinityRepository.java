@@ -11,6 +11,6 @@ import com.gamificacao.model.UserAffinity;
 public interface UserAffinityRepository extends JpaRepository<UserAffinity, Long> {
 
 	@Query("from UserAffinity af where af.affinity.id= :id and af.user.id = :user_id")
-	UserAffinity findByForeignKeysId(@Param("id") Long id, @Param("user_id") Long user_id);
+	UserAffinity findByForeignKeysId(@Param("id") Long id, @Param("user_id") Long user_id); // busca afinidade do usuario pela atividade
 	
 }

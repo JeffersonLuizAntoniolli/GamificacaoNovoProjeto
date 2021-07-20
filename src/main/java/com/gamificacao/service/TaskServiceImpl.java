@@ -72,18 +72,18 @@ public class TaskServiceImpl implements TaskService {
         	}
         	userRepository.save(user);
         }
-        if(task.getAffinity()!=null) {
+        if(task.getAffinity()!=null) { //  vai atribuir ao usuário incrementa-la
         	UserAffinity userAffinity = 
         				userAffinityRepository.findByForeignKeysId(
         											task.getAffinity().getId(), 
         											user.getId()); 
-        	if(userAffinity == null) {
+        	if(userAffinity == null) { // se afinidade for nula, vai criar afinidade e da exp
         		userAffinity = new UserAffinity();
         		userAffinity.setAffinity(task.getAffinity());
         		userAffinity.setUser(user);
         		userAffinity.setExperience(1);
         	}else {
-        		userAffinity.setExperience(userAffinity.getExperience()+1);
+        		userAffinity.setExperience(userAffinity.getExperience()+1); // senão, vai aumentar afinidade que já existe
         	}
     		userAffinityRepository.save(userAffinity);
         }
@@ -104,6 +104,17 @@ public class TaskServiceImpl implements TaskService {
         		user.setExperience(0);
         	}
         	userRepository.save(user);
+        }
+        
+        if(task.getAffinity()!=null) { //  vai atribuir ao usuário incrementa-la
+        	UserAffinity userAffinity = 
+        				userAffinityRepository.findByForeignKeysId(
+        											task.getAffinity().getId(), 
+        											user.getId()); 
+        	if(userAffinity != null) { // se desmarcada atividade, vai ser retirado a experiencia da afinidade
+        		userAffinity.setExperience(userAffinity.getExperience()-1);
+        		userAffinityRepository.save(userAffinity);
+        	} 		
         }
     }
 
