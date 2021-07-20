@@ -19,7 +19,7 @@
 
     <div class="card mb-3">
 
-        <h1 class="my-highest-header card-header">Perfil do Usuário</h1>
+        <h1 class="my-highest-header card-header">Seu Perfil de Usuário</h1>
 
         <div class="card card-body">
             <div class="row">
@@ -28,6 +28,7 @@
                     <h2 class="my-second-header" th:text="'Nome: '+${user.name}"></h2>
                     <h2 class="my-second-header" th:text="'Email: '+${user.email}"></h2>
                     <h2 class="my-second-header" th:text="'Exp.: '+${user.experience}"></h2>
+                    <h2 class="my-second-header" th:text="'Pontos: '+${user.points}"></h2>
                 </div>
                 <div class="col-6 col-sm-2">
                 	<div>
@@ -39,7 +40,64 @@
                         <img th:src="${user.photo}" alt="user photo" class="embed-responsive embed-responsive-3by4">
                     </div>
             	</div>
-	
+			
+			 </table>
+            <!-- Lista de Afinidades do Perfil Acessado -->
+            <h2>Sua Lista de Afinidades</h2>
+            <table class="my-tab table text-left">
+
+                <thead class="table-info">
+                <tr>
+                    <th style="width:20%">Nome da Afinidade</th>
+                    <th style="width:60%" class="d-none d-sm-table-cell">Descrição da Afinidade</th>
+                    <th style="width:20%">Experiencia da Afinidade</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="t : ${useraffinity}">
+
+                    <td class="text-left" th:text="${t.name}"></td>
+                    <td class="text-left d-none d-sm-table-cell" th:text="${t.description}"></td>
+
+				<!-- Se não tiver afinidade vinculada por executar atividades, será mostrado mensagem de exceção -->
+               <!--  <tr th:if="${user.affinity.size()==0}">
+                    <td colspan="5" th:text="${'Sem afinidades encaminhadas para '+ user.name}"></td>
+                </tr> -->
+                
+                </tbody>
+                
+               
+            </table>
+            
+            <!-- Lista de Itens Comprados pelo Perfil Acessado -->
+            <h2>Sua Lista de Itens Comprados</h2>
+            <table class="my-tab table text-left">
+
+                <thead class="table-info">
+                <tr>
+                    <th style="width:20%">Nome do Item</th>
+                    <th style="width:50%" class="d-none d-sm-table-cell">Descrição do Item</th>
+                    <th style="width:20%">Custo do Item</th>
+                    <th style="width:20%">Ação</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="t : ${useraffinity}">
+
+                    <td class="text-left" th:text="${t.name}"></td>
+                    <td class="text-left d-none d-sm-table-cell" th:text="${t.description}"></td>
+
+				<!-- Se não tiver afinidade vinculada por executar atividades, será mostrado mensagem de exceção
+                <tr th:if="${user.affinity.size()==0}">
+                    <td colspan="5" th:text="${'Sem afinidades encaminhadas para '+ user.name}"></td> -->
+                </tr>
+                
+                </tbody> 
+
+            </table>
+			
+			<!-- Lista de Atividades do Perfil Acessado -->
+			<h2>Sua Lista de Atividades</h2>
             <table class="my-tab table text-left">
 
                 <thead class="table-info">
@@ -78,7 +136,9 @@
                 <tr th:if="${user.tasksOwned.size()==0}">
                     <td colspan="5" th:text="${'Sem atividades encaminhadas para '+ user.name}"></td>
                 </tr>
+                
                 </tbody>
+           
             </table>
         </div>
     </div>

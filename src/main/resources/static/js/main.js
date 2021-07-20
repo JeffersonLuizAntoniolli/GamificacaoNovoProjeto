@@ -34,7 +34,7 @@ $(document).ready(function () {
     $('.dataTables_length').addClass('bs-select');
 }); */
 
-//Contas para testes
+/*Contas para testes*/
 $(document).ready(function () {
     $("#demo-admin-btn").click(function () {
         $("#email").val("manager@mail.com");
@@ -53,4 +53,3 @@ $(document).ready(function () {
         $("#password").val("112233");
     });
 });
-

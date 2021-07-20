@@ -18,7 +18,7 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     private static final String ADMIN="ADMIN";
     private static final String USER="USER";
-    
+    private static final String GAMEMASTER="GAMEMASTER";
     private UserRepository userRepository;
     private TaskRepository taskRepository;
     private RoleRepository roleRepository;
@@ -87,6 +87,13 @@ public class UserServiceImpl implements UserService {
 //        user.setPhoto(updatedUser.getPhoto());
         userRepository.save(user);
 	}
+	
+	@Override //Serviço para mudar o papel do usuario para Gamemaster do Sistema
+    public User changeRoleToGameMaster(User user) {
+        Role gameMasterRole = roleRepository.findByRole(GAMEMASTER);
+        user.setRoles(new ArrayList<>(Collections.singletonList(gameMasterRole)));
+        return userRepository.save(user);
+    }
 
 }
 

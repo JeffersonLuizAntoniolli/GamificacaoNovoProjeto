@@ -32,10 +32,11 @@
                 <tr>
                     <th>Nome</th>
                     <th class="d-none d-lg-table-cell">Email</th>
-                    <th>Atividades em Andamento</th>
-                    <th class="d-none d-md-table-cell">Atividades Concluidas</th>
+                    <!-- <th>Atividades em Andamento</th>
+                    <th class="d-none d-md-table-cell">Atividades Concluidas</th> -->
                     <th class="d-none d-md-table-cell">Experiência</th>
-                    <th th:if="${isAdminSigned}" colspan="2">Ações</th>
+                    <th class="d-none d-md-table-cell">Pontos</th>
+                    <th tsec:authorize="hasRole('ROLE_ADMIN')" colspan="2">Ações</th>
                 </tr>
                 </thead>
 
@@ -52,18 +53,18 @@
                     <!--Email-->
                     <td th:text="${user.email}" class="d-none d-lg-table-cell"></td>
 
-                    <!--Atividades em Progresso-->
+                    <!--Atividades em Progresso
                     <td th:if="${user.getTasksInProgress().size() gt 0}">
                         <ol class="pl-3">
                             <li th:each="t : ${user.getTasksInProgress()}">
                                 <span th:text="${user.name}"></span>
-                                <!--/*/ <th:block th:include="fragments/days-left-until-deadline :: daysLeft(${t})"></th:block> /*/-->
+                         
                             </li>
                         </ol>
                     </td>
-                    <td th:if="${user.getTasksInProgress().size()==0}">0</td>
+                    <td th:if="${user.getTasksInProgress().size()==0}">0</td> -->
 
-                    <!--Atividades Completadas-->
+                    <!--Atividades Completadas
                     <td th:if="${user.getTasksCompleted().size() gt 0}" class="d-none d-md-table-cell">
                         <ol class="pl-3">
                             <li th:each="t : ${user.getTasksCompleted()}">
@@ -71,32 +72,35 @@
                             </li>
                         </ol>
                     </td>
-                    <td th:if="${user.getTasksCompleted().size()==0}" class="d-none d-md-table-cell">0</td>
+                    <td th:if="${user.getTasksCompleted().size()==0}" class="d-none d-md-table-cell">0</td>-->
                     
                     <!--Experiência-->
                     <td th:text="${user.experience}" class="d-none d-lg-table-cell"></td>
                     
-                    <!--botão editar-->
+                     <!--Pontos-->
+                    <td th:text="${user.points}" class="d-none d-lg-table-cell"></td>
+                    
+                    <!--botão editar
                     <td th:if="${isAdminSigned}" class="d-none d-lg-table-cell">
                         <a th:href="${'/user/edit/' + user.id}" class="btn btn-outline-success btn-sm">Editar</a>
-                    </td>
-
+                    </td>-->
+					<!--botão editar
                     <td th:unless="${isAdminSigned}" class="d-none d-lg-table-cell">
-                        <span data-toggle="tooltip" data-placement="top" data-html="true"
+                        <span sec:authorize="hasRole('ROLE_ADMIN')" data-toggle="tooltip" data-placement="top" data-html="true"
                               title="Apenas o Administrador pode atualizar os dados dos colaboradores">
                         <a th:href="${'/user/edit/' + user.id}" class="btn btn-outline-secondary btn-sm disabled">Editar</a>
                         </span>
-                    </td>
+                    </td>-->
 
                     <!--Botão Deletar-->
-                    <td th:if="${isAdminSigned and !user.isAdmin()}">
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">
                         <a data-toggle="modal" data-target="#modal-soft-delete"
                            th:attr="data-target='#modal-soft-delete'+${user.id}"
                            th:href="${'user/delete/' + user.id}"
                            class="btn btn-outline-danger btn-sm">Deletar
                         </a>
                     </td>
-                    <td th:if="${isAdminSigned and user.isAdmin()}"></td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"></td>
 
                     <!--modal para confirmação de exclusão-->
                     <div class="modal" th:id="modal-soft-delete+${user.id }">

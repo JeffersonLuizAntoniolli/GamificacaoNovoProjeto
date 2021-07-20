@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
-    <title>Sobre</title>
+    <title>Dicas e Informações</title>
 </head>
 
 <body>
@@ -15,17 +15,69 @@
 </header>
 
 <main class="container">
-    <h1 class="display-4">Projeto de Gamificação</h1>
-    <p class="lead">Projeto de Gamificação junto a controle de atividades</p>
+    <h1 class="display-4">Dicas e Informações</h1>
+    <p class="lead">Nesta Página estaremos lhe apresentando algumas informações que possam lhe auxiliar a utilizar a mexer no sistema. Vamos lá</p>
 
     <hr class="my-4">
-    <p>Construido com:</p>
+    <p>Alguns Detalhes de Funcionamento do Protótipo de um simples Gerenciador de Atividades com Gamificação:</p>
     <ul>
-        <li>Ser Preenchido</li>
-
+        <li>Não pode remover Projetos com Atividades Cadastradas nele;</li>
+        <li>Colaborador pode somente editar e remover suas próprias atividades que criou;</li>
+        <li>Quando Colaborador finalizar uma atividade que ele não tem afinidade, essa afinidade será atribuida para ele;</li>
+        <li>Na Conclusão de uma atividade, será atribuido '+1' para sua experiência de usuário e '+1' para sua experiência de afinidade atrelada à atividade;</li>
+        <li>Quando a atividade é desmarcada como completada, o usuário responsável perde '-1' da sua experiência de usuário e '-1' da sua experiência de afinidade;</li>
+        <li>Por padrão, todo novo usuário começa com '0' de experiência de usuário e das afinidades cadastradas;</li>
+        <li>Na Conclusão de uma atividade, será atribuido '+1' para o total de pontos que o usuário possui,;</li>
+        <li>Quando a atividade é desmarcada como completada, o usuário responsável perde '-1' dos seus pontos (Caso tiver 0, ficará negativo);</li>
+        <li>Por padrão todo usuário novo começa com 0 pontos;</li>
+        <li>Para comprar itens na loja, é necessário que o usuário tenha o numero de pontos igual ou superior ao custo do item que é apresentando;</li>
+        <li>O usuário poderá comprar mais de um mesmo item na loja;</li>
+        <li>Na página de perfil do usuário logado, é possivel visualizar dados pessoais e também a lista de: suas afinidades, seus itens comprados e suas atividades como reponsavel;</li>
+        <li>Para utilizar um item, acesse o perfil do usuário logado onde apresenta o 'email' no cabeçalho da página;</li>
+        <li>Um item uma vez que marcado como utilizado, terá sua situação alterada e ficará como registro no Historico do perfil de Usuário Logado;</li>
+        <li>Para atualizar uma imagem de avatar, acesse o perfil do usuário logado onde apresenta o 'email' no cabeçalho da página;</li>
+        <li>Não é recomendado querer tentar remover os usuários: ADMIN, MANAGER e GAMEMASTER;</li>
+        <li>Todos os usuários podem acessar o menu de 'Ranking' para visualizar os melhores colocados.</li>
+    </ul>
+    
+    <hr class="my-4">
+    <p>Missões para iniciar e aprender à mexer com o sistema:</p>
+    <ul>
+    	<li><strong>1º Missão:</strong> Acessar como usuário Administrador, vá no projeto <strong>"Aprendendo a mexer no sistema como Administrador do Sistema"</strong> e conclua todas as atividades;</li>
+    	<li><strong>2º Missão:</strong> Acessar como usuário GameMaster, vá no projeto <strong>"Aprendendo a mexer no sistema como Game Master"</strong> e conclua todas as atividades;</li>
+    	<li><strong>3º Missão:</strong> Acessar como usuário Colaborador, vá no projeto <strong>"Aprendendo a mexer no sistema como Colaborador"</strong> e conclua todas as atividades;</li>
+    	<li><strong>4º Missão:</strong> Se divirta como quiser!! xD</li>
+    </ul>
+    
+    <hr class="my-4">
+    <p>Como Usuário <strong>Colaborador</strong>, você vai poder:</p>
+    <ul>
+    	<li>Comprar Itens da Loja;</li>
+    	<li>Alterar imagem de perfil (Seu Avatar);</li>
+    	<li>Ao completar atividades, adquirir pontos de compra e experiência de Afinidade;</li>
+        <li>Ao completar atividades, aumentar sua experiência total;</li>
+        <li>Vizualizar o Menu de Ranking;</li>
+        <li>Poder adicionar atividades para sí mesmo como Responsável.</li>
     </ul>
 
-  <!--  <p>Code: <a href="https://github.com/rengreen/task-manager">github.com/rengreen/task-manager</a></p> --> 
+    <p>Como Usuário <strong>Administrador</strong> ou <strong>Gerente de Projetos</strong>, você vai poder:</p>
+    <ul>
+    	<li>Mesmas ações que o Colaborador;</li>
+        <li>Cadastrar, Editar e Remover Projetos; </li>
+		<li>Cadastrar, Editar e Remover Atividades;</li>
+		<li>Encaminhar/Retirar Atividades para demais usuários;</li>
+		<li>Cadastrar, Editar (Dados Básicos) e Remover Usuário;</li>
+		<li>Concluir todas Atividades e todos Projetos.</li>
+    </ul>
+   
+    <p>Como Usuário <strong>Game Master</strong>, você vai poder:</p>
+    <ul>
+    	<li>Mesmas ações que o Colaborador;</li>
+        <li>Adicionar, Editar e Remover Afinidades;</li>
+        <li>Adicionar, Editar e Remover Itens da Loja.</li>
+    </ul>
+
+	
 
 </main>
 

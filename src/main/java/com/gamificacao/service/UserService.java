@@ -21,5 +21,7 @@ public interface UserService {
     void deleteUser(Long id); //Serviço para Deletar Usuário do Sistema
     
     void updateUser(Long id, User user); //Serviço para atualizar o perfil Usuário do Sistema
+
+	User changeRoleToGameMaster(User user);  //Serviço para mudar o papel do usuario para Game master do Sistema
    
 }

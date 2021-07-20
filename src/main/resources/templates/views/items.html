@@ -18,7 +18,7 @@
     <div class="card mb-3">
 
         <h1 class="my-highest-header card-header">Itens da Loja
-        	 <span>
+        	 <span sec:authorize="hasAnyRole('ROLE_GAMEMASTER')">
                 <a href="/item/create" class="btn btn-outline-info btn-lg float-right">Criar uma Novo Item</a>
             </span> 
         </h1>
@@ -29,10 +29,10 @@
 
                 <thead class="table-primary">
                 <tr>
-                    <th style="width:15%" class="text-left">Nome da Item</th>
-                    <th style="width:55%" class="text-left">Descrição do Item</th>
-                    <th style="width:15%" class="text-left">Custo do Item</th>
-                    <th style="width:15%" class="d-none d-lg-table-cell" colspan="2">Ações</th>
+                    <th style="width:20%" class="text-left">Nome</th>
+                    <th style="width:44%" class="text-left">Descrição</th>
+                    <th style="width:10%" class="text-left">Custo</th>
+                    <th style="width:26%" class="d-none d-lg-table-cell" colspan="3">Ações</th>
                 </tr>
 
                 </thead>
@@ -67,9 +67,14 @@
                     <!--Custo do Item -->
                     <td th:text="${t.cost}" class="d-none d-lg-table-cell"></td>
                     
-                    <!--botão editar-->
+                     <!--botão Comprar-->
                     <td class="d-none d-lg-table-cell">
-                        <a th:href="${'/item/edit/' + t.id}" class="btn btn-outline-success btn-sm">Editar</a>
+                        <a th:href="${'/item/edit/' + t.id}" class="btn btn-outline-warning btn-sm">Comprar</a>
+                    </td>
+                    
+                    <!--botão editar-->
+                    <td  class="d-none d-lg-table-cell">
+                        <a sec:authorize="hasAnyRole('ROLE_GAMEMASTER')" th:href="${'/item/edit/' + t.id}" class="btn btn-outline-success btn-sm">Editar</a>
                     </td>
 
                  <!--    <td class="d-none d-lg-table-cell">
@@ -81,7 +86,7 @@
 
                     <!--botão deletar-->
                     <td class="d-none d-lg-table-cell">
-                        <a data-toggle="modal" data-target="#modal-delete"
+                        <a sec:authorize="hasAnyRole('ROLE_GAMEMASTER')" data-toggle="modal" data-target="#modal-delete"
                            th:attr="data-target='#modal-delete'+${t.id}"
                            th:href="${'/item/delete/' + t.id}"
                            class="btn btn-outline-danger btn-sm">Deletar

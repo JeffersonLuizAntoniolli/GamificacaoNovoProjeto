@@ -28,8 +28,12 @@ public class User {
     @Column(columnDefinition = "VARCHAR(255) DEFAULT 'images/user.png'")
     private String photo;
     @Column 
-    private Integer experience = 0;
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+    private Integer experience = 0; // atributo para medir o nivel de experiencia total do usuário
+    @Column 
+    private Integer points = 0; // atributo utilizado para medir quantidade de pontos do usuário para que possa comprar itens
+    
+
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Task> tasksOwned;
 
     @ManyToMany(cascade = CascadeType.MERGE)
@@ -163,5 +167,13 @@ public class User {
 
 	public void setExperience(Integer experience) {
 		this.experience = experience;
+	}
+	
+	public Integer getPoints() {
+		return points;
+	}
+
+	public void setPoints(Integer points) {
+		this.points = points;
 	}
 }

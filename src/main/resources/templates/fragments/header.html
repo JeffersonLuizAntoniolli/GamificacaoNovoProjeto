@@ -14,6 +14,11 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
+            
+            	 <!--Sobre-->
+                <li th:class="${activeTab == 'about'}? 'active nav-item mr-4' : 'nav-item mr-4'">
+                    <a class="nav-link" href="/about">Dicas e Informações</a>
+                </li>
 
                 <!--Inicio
                 <li th:class="${activeTab == 'home'}? 'active nav-item mr-4' : 'nav-item mr-4'">
@@ -50,11 +55,11 @@
                     <a class="nav-link" href="/users">Lista de Usuários</a>
                 </li>
                 
-                <!--Gaming
-                <li th:class="${activeTab == 'Gaming'}? 'active nav-item mr-4' : 'nav-item mr-4'"
-                    sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_GAMEMASTER')">
-                    <a class="nav-link" href="/about">Gaming</a>
-                </li>-->
+               	<!--Afinidades-->
+                <li th:class="${activeTab == 'Ranking'}? 'active nav-item mr-4' : 'nav-item mr-4'"
+                    sec:authorize="hasRole('ROLE_GAMEMASTER')">
+                    <a class="nav-link" href="/affinitys">Afinidades</a>
+                </li>
                 
                 <!--Loja-->
                 <li th:class="${activeTab == 'Store'}? 'active nav-item mr-4' : 'nav-item mr-4'"
@@ -68,22 +73,13 @@
                     <a class="nav-link" href="/about">Ranking</a>
                 </li>
                 
-                <!--Afinidades-->
-                <li th:class="${activeTab == 'Ranking'}? 'active nav-item mr-4' : 'nav-item mr-4'"
-                    sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/affinitys">Afinidades</a>
-                </li>
-
                 <!--Perfil
                 <li th:class="${activeTab == 'profile'}? 'active nav-item mr-4' : 'nav-item mr-4'"
                     sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/profile">Perfil</a>
                 </li>-->
 
-                <!--Sobre
-                <li th:class="${activeTab == 'about'}? 'active nav-item mr-4' : 'nav-item mr-4'">
-                    <a class="nav-link" href="/about">Sobre</a>
-                </li>-->
+               
             </ul>
 
             <ul class="navbar-nav">
