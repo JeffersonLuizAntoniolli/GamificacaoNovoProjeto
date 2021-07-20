@@ -22,7 +22,7 @@ public class Task {
     @Column(length = 1200)	
     @Size(max = 1200, message = "{Limite de caracteres é de 1200}")
     private String description; 	// Descrição da Atividade
-    @NotNull(message = "{task.date.not.null}")
+    @NotNull(message = "{Precisa ser preenchido uma data de prazo final para Atividade}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date; 		// Data de prazo final da Atividade
     private boolean isCompleted; // Atividade Foi concluida ou não

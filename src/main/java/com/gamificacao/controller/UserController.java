@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gamificacao.model.Project;
 import com.gamificacao.model.User;
@@ -19,6 +20,7 @@ import com.gamificacao.service.UserService;
 public class UserController {
 
     private UserService userService;
+    public static String uploadDirectory = System.getProperty("user")+"uploads"; // atributo para configurar diretorio do upload
 
     @Autowired
     public UserController(UserService userService) {
@@ -57,4 +59,9 @@ public class UserController {
         return "redirect:/users";
     }
 
+    @RequestMapping("user/uploadavatar")
+    public String UploadAvatar(Model model) {
+    	return "forms/uploadavatar";
+    }
+    
 }

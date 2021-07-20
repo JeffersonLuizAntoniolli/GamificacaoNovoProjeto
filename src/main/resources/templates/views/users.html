@@ -34,6 +34,7 @@
                     <th class="d-none d-lg-table-cell">Email</th>
                     <th>Atividades em Andamento</th>
                     <th class="d-none d-md-table-cell">Atividades Concluidas</th>
+                    <th class="d-none d-md-table-cell">Experiência</th>
                     <th th:if="${isAdminSigned}" colspan="2">Ações</th>
                 </tr>
                 </thead>
@@ -71,6 +72,9 @@
                         </ol>
                     </td>
                     <td th:if="${user.getTasksCompleted().size()==0}" class="d-none d-md-table-cell">0</td>
+                    
+                    <!--Experiência-->
+                    <td th:text="${user.experience}" class="d-none d-lg-table-cell"></td>
                     
                     <!--botão editar-->
                     <td th:if="${isAdminSigned}" class="d-none d-lg-table-cell">

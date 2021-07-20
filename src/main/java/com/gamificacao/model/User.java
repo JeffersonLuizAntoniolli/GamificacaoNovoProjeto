@@ -27,8 +27,8 @@ public class User {
     private String password;
     @Column(columnDefinition = "VARCHAR(255) DEFAULT 'images/user.png'")
     private String photo;
-    @Column
-    private Integer experience;
+    @Column 
+    private Integer experience = 0;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Task> tasksOwned;
 

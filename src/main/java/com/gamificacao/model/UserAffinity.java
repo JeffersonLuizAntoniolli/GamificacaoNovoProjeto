@@ -23,7 +23,7 @@ public class UserAffinity {
 	@ManyToOne
 	private Affinity affinity;
 	@Column
-    private Integer experience;
+    private Integer experience = 0;
 	
 	public UserAffinity() {
     }
