@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.gamificacao.model.Project;
 import com.gamificacao.model.Task;
 import com.gamificacao.model.User;
+import com.gamificacao.service.AffinityService;
 import com.gamificacao.service.ProjectService;
 import com.gamificacao.service.TaskService;
 import com.gamificacao.service.UserService;
@@ -26,6 +27,9 @@ public class ProjectController {
 	 private ProjectService projectService;
 	 private TaskService taskService;
 	 private UserService userService;
+	 
+	 @Autowired // instancia no metodo construtor para o objetivo não ficar nulo e não precisar colocar manualmente
+    private AffinityService affinityService;
 	 
 	 @Autowired
 	 public ProjectController(ProjectService projectService, TaskService taskService, UserService userService) {
@@ -136,6 +140,7 @@ public class ProjectController {
         }
         task.setProject(new Project(id)); // serviço que já vai adicionar codigo do projeto para atividade quando ela for criada em project-tasks
         model.addAttribute("task", task);
+        model.addAttribute("affinitys", affinityService.findAll());
         return "forms/task-new";
     }
     
