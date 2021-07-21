@@ -16,4 +16,6 @@ public interface ItemService {
     List<Item> findAll();  // serviço para listar todos os itens do sistema
    
     Item getItemById(Long ItemId); // serviço que busca um item pelo seu ID
+    
+    void buyItem(Long itemId, String userEmail) throws Exception; // realiza a compra do item pelo usuário
 }

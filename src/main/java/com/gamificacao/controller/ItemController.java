@@ -1,5 +1,9 @@
 package com.gamificacao.controller;
 
+import java.security.Principal;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
@@ -10,14 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gamificacao.model.Item;
-import com.gamificacao.model.Task;
-import com.gamificacao.model.User;
 import com.gamificacao.service.ItemService;
-import com.gamificacao.service.TaskService;
-import com.gamificacao.service.UserService;
-
-import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 public class ItemController {
@@ -32,7 +29,8 @@ public class ItemController {
     @GetMapping("/items")
     public String listItems(Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
     	//boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN");
-    	
+
+		model.addAttribute("errorMessage", null);
     	model.addAttribute("items", itemService.findAll());
         return "views/items";
     }
@@ -74,5 +72,19 @@ public class ItemController {
     public String deleteItem(@PathVariable Long id) {     
     	 itemService.deleteItem(id);
          return "redirect:/items";
+    }
+    
+    @GetMapping("/item/buy/{id}")
+    public String buyItem(@PathVariable Long id,Principal principal, Model model) {     
+		model.addAttribute("items", itemService.findAll());
+    	try {
+			itemService.buyItem(id, principal.getName());
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "views/items";
+		}
+
+		model.addAttribute("successMessage", "Item comprado com sucesso");
+		return "views/items";
     }
 }

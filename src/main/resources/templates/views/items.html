@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org"
+<html 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 <head>
 	<meta charset="utf-8">
@@ -24,6 +26,13 @@
         </h1>
 		
         <div class="card card-body">
+        	<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+			  	<span th:text="${errorMessage}"></span>
+			</div>
+        	<div th:if="${successMessage}" class="alert alert-success" role="alert">
+			  	<span th:text="${successMessage}"></span>
+			</div>
+        
             <table id="sortableTable" class="my-tab table table-hover text-center"
                    style="table-layout: fixed; width: 100%;">
 
@@ -42,24 +51,6 @@
                 <tr th:each="t : ${items}">          
                     <!--Nome do Item-->
                     <td th:text="${t.name}" class="d-none d-lg-table-cell"></td>
-                   <!-- <td class="text-left">
-                        <span>
-                           <a data-toggle="modal" data-target="#modal-details"
-                               th:attr="data-target='#modal-details'+${t.id}"
-                               th:href="${'/item/' + t.id}"
-                               class="nav-link my-link px-1 d-inline"
-                               th:text="${t.name}+' '"
-                            ></a>
-                              <a data-toggle="modal" data-target="#modal-details"
-                               th:attr="data-target='#modal-details'+${t.id}"
-                               th:href="${'/item/' + t.id}"
-                               class="btn-link d-inline"
-                            >
-                           <small class="badge badge-light">Detalhar!</small> 
-                            </a>
-
-                        </span>
-                    </td>--> 
                     
                     <!--Descrição do Item -->
                     <td th:text="${t.description}" class="d-none d-lg-table-cell"></td>
@@ -69,20 +60,13 @@
                     
                      <!--botão Comprar-->
                     <td class="d-none d-lg-table-cell">
-                        <a th:href="${'/item/edit/' + t.id}" class="btn btn-outline-warning btn-sm">Comprar</a>
+                        <a th:href="${'/item/buy/' + t.id}" class="btn btn-outline-warning btn-sm">Comprar</a>
                     </td>
                     
                     <!--botão editar-->
                     <td  class="d-none d-lg-table-cell">
                         <a sec:authorize="hasAnyRole('ROLE_GAMEMASTER')" th:href="${'/item/edit/' + t.id}" class="btn btn-outline-success btn-sm">Editar</a>
                     </td>
-
-                 <!--    <td class="d-none d-lg-table-cell">
-                        <span data-toggle="tooltip" data-placement="top" data-html="true"
-                              title="Only item owner or admin can edit this item">
-                        <a th:href="${'/item/edit/' + t.id}" class="btn btn-outline-secondary btn-sm disabled">Editar</a>
-                        </span>
-                    </td> -->
 
                     <!--botão deletar-->
                     <td class="d-none d-lg-table-cell">
@@ -133,11 +117,8 @@
 </main>
 
 <footer class="footer">
-    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
 </footer>
 
-<!--DataTable plug-in-->
-<!--remain scroll position after redirect-->
 <script src="js/main.js"></script>
 
 </body>

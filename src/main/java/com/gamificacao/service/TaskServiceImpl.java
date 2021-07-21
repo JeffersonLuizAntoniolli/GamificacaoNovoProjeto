@@ -70,6 +70,11 @@ public class TaskServiceImpl implements TaskService {
         	}else {
         		user.setExperience(1);
         	}
+        	if(user.getPoints()!=null) {
+        		user.setPoints(user.getPoints()+1);
+        	}else {
+        		user.setPoints(new Long(1));
+        	}
         	userRepository.save(user);
         }
         if(task.getAffinity()!=null) { //  vai atribuir ao usuário incrementa-la
@@ -102,6 +107,11 @@ public class TaskServiceImpl implements TaskService {
         		user.setExperience(user.getExperience()-1);
         	}else {
         		user.setExperience(0);
+        	}
+        	if(user.getPoints()!=null) {
+        		user.setPoints(user.getPoints()-1);
+        	}else {
+        		user.setPoints(new Long(0));
         	}
         	userRepository.save(user);
         }
