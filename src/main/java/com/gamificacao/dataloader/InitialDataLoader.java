@@ -136,7 +136,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         //Atividade Admin 1
         taskService.createTask(new Task(
                 "Introdução ao Papel do Administrador",
-                "Olá, tudo bem? Vamos conhecer quais são as principais funções e papel do Administrador no sistema? O administrador  serão aqueles executarão as atividades dos projetos criados pelo Administrador ou Gerente de Projetos, como também aqueles que comprarão e utilizaração os itens criados pelo Game Master do sistema. De forma resumida, são os jogadores ou então os players. Vamos iniciar nossa jornada em como podemos interagir com o sistema, sendo inicialmente concluido está atividade na coluna Finlizado. Vamos lá!",
+                "Olá, tudo bem? Vamos conhecer quais são as principais funções e papel do Administrador no sistema? O administrador serão aqueles executarão a criação de atividades e projetos no sistema, ou seja, farão a gestão de atividades e serviço dentro do sistema para que os demais colaboradores envolvidos. Como também poderão executar atividades semelhantes do Colaborador, de poder comprar e utilizar os itens criados pelo Game Master do sistema. Vamos iniciar nossa jornada em como podemos interagir com o sistema, sendo inicialmente concluído está atividade na coluna Finalizado. Vamos lá!",
                 today.minusDays(-2),
                 false,
                 userService.getUserByEmail("manager@mail.com").getName(),

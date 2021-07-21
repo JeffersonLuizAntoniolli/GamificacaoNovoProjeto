@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Sucesso</title>
+</head>
+
+<body>
+
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('register')"></th:block> /*/-->
+</header>
+
+<main class="container">
+    <div class="alert alert-dark">
+        <center><h1 class="my-highest-header">Verifique Os Primeiros Lugares Do Ranking!!!! :)</h1></center>
+    </div>
+    	<br>
+    	<!--  Os Primeiros Usuários com as Maiores Experiências de Usuário do Sistema -->
+		<center><h4>As Maiores Exeperiências De Usuário</h4></center>
+        <table class="my-tab table text-left">
+
+            <thead class="table-info">
+                <tr>
+                    <th style="width:34%">Nome do Participante</th>
+                    <th style="width:33%">Email do Participante</th>
+                    <th style="width:33%" class="d-none d-sm-table-cell">Experiência Total de Usuário</th>
+                </tr>
+            </thead>
+        </table>
+        
+        
+        <br>
+        <!--  Os Primeiros Usuários com as Maiores Quantidades de Pontos do Sistema -->
+		<center><h4>Os Usuários Com As Maiores Quantidades de Pontos Acumulados</h4></center>
+        <table class="my-tab table text-left">
+
+            <thead class="table-info">
+                <tr>
+                    <th style="width:34%">Nome do Participante</th>
+                    <th style="width:33%">Email do Participante</th>
+                    <th style="width:33%" class="d-none d-sm-table-cell">Total Pontos de Usuário</th>
+                </tr>
+            </thead>
+        </table>
+        
+        <br>
+        <!--  As Afinidades com As Maiores Experiências do Jogo -->
+		<center><h4>As Afinidades com as maiores pontuações de Experiências</h4></center>
+		<center><h6>Serão considerados o total de experiencia acumulada considerando todos os usuários do sistema</h6></center>
+        <table class="my-tab table text-left">
+
+            <thead class="table-info">
+                <tr>
+                    <th style="width:34%">Nome da Afinidade</th>
+                    <th style="width:33%">Descrição da Afinidade</th>
+                    <th style="width:33%" class="d-none d-sm-table-cell">Experiência Total da Afinidade</th>
+                </tr>
+            </thead>
+        </table>
+</main>
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+</body>
+</html>
