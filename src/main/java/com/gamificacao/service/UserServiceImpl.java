@@ -38,6 +38,8 @@ public class UserServiceImpl implements UserService {
 
     @Override  // Serviço para criar um novo usuário no sistema
     public User createUser(User user) {
+    	user.setExperience(0);
+    	user.setPoints(new Long(0));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByRole(USER);
         user.setRoles(new ArrayList<>(Collections.singletonList(userRole)));
@@ -82,9 +84,10 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(Long id, User updatedUser) {
 		User user = userRepository.getOne(id);
         user.setName(updatedUser.getName());
-//        user.setEmail(updatedUser.getEmail());
-//        user.setPassword(updatedUser.getPassword());
-//        user.setPhoto(updatedUser.getPhoto());
+        user.setEmail(updatedUser.getEmail());
+     //   user.setPassword(updatedUser.getPassword());
+    //    user.setPhoto(updatedUser.getPhoto());
+        
         userRepository.save(user);
 	}
 	
