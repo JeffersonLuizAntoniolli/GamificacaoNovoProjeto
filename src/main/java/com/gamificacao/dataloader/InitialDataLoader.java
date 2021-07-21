@@ -97,17 +97,17 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         		"Atividades de Teste",
         		"Está afinidade é acumulo de experiências com todos os tipos de atividades de teste"	
         ));
-        
+     // afinidade padrão focada para inicio do Game Master conforme for realizando as atividades do projeto de Game Master
         Affinity gamificacao = affinityService.createAffinity(new Affinity(
         		"Atividades de Gamificação",
         		"Está afinidade é acumulo de experiências com todos os tipos de atividades focadas na Gamificação."	
         ));
-        
+        // afinidade padrão focada para inicio do administrador conforme for realizando as atividades do projeto de Administrador
         Affinity gerencia = affinityService.createAffinity(new Affinity(
         		"Atividades de Gerenciamento e Administração",
         		"Está afinidade é acumulo de experiências com todos os tipos de atividades focadas no Gerenciamento e Administração."	
         ));
-        
+        // afinidade padrão focada para inicio do colaborador conforme for realizando as atividades do projeto de colaborador
         Affinity novico = affinityService.createAffinity(new Affinity(
         		"Atividades Noviço",
         		"Está afinidade é acumulo de experiências com todos os tipos de atividades focadas enquanto o colaborador for Noviço, ou seja, estiver em aprendizado e adquirido conhecimento na empresa"	
@@ -125,39 +125,110 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         userService.changeRoleToAdmin(manager); // Usuário com papel Admin não pode ser deletado
         
         //1
-        
+        //Projeto inicial do Admin
         Project projectAdmin = projectService.createProject(new Project(
         		"Aprendendo a mexer no sistema como Administrador do Sistema",
         		today,
-        		true,
+        		false,
         		userService.getUserByEmail("manager@mail.com").getName()
         ));
 
         //Atividade Admin 1
         taskService.createTask(new Task(
-                "Primeira Atividade Teste",
-                "Primeira Descrição Atividade Teste.",
-                today.minusDays(-1),
-                true,
+                "Introdução ao Papel do Administrador",
+                "Olá, tudo bem? Vamos conhecer quais são as principais funções e papel do Administrador no sistema? O administrador  serão aqueles executarão as atividades dos projetos criados pelo Administrador ou Gerente de Projetos, como também aqueles que comprarão e utilizaração os itens criados pelo Game Master do sistema. De forma resumida, são os jogadores ou então os players. Vamos iniciar nossa jornada em como podemos interagir com o sistema, sendo inicialmente concluido está atividade na coluna Finlizado. Vamos lá!",
+                today.minusDays(-2),
+                false,
+                userService.getUserByEmail("manager@mail.com").getName(),
+                userService.getUserByEmail("manager@mail.com"),
+                projectAdmin,
+                gerencia   
+        ));
+        
+      //Atividade Admin 2
+        taskService.createTask(new Task(
+                "Cadastro de Um Novo Projeto",
+                "Primeiramente para inicializarmos com as ações disponiveis que um Administrador ou um Gerente de Projetos pode ter no sistema, vamos começar olhando em como podemos cadastrar um novo Projeto para dar inicio as nossas listas de atividades. Para isso, uma vez que você esteja logado no sistema como usuário Administrador, vá no no menu Lista de Projetos localizado no cabeçalho da página. Então, será visto lista de projetos tutoriais já previamente cadastrados no sistema, com objetivo de explicar e passar o conhecimento de como utilizar o sistema de gerenciamento de atividades com base no papel de cada usuário. Mas para criar seu próprio projeto, basta você ir no botão Criar Novo Projeto, preencha os dados obrigatórios e confirme em Salvar. Uma vez que essa etapa esteja finalizada, retorne ao projeto \"Aprendendo a mexer no sistema como Administrador do Sistema\" e finalize está atividade, pois estaremos indo para a próxima. DICA: Analisando a ultima coluna da lista de projetos, será possivel ver que o administrador também editar ou então deletar projetos, mas que se já estiver com atividades criadas em si, não é recomendado sua exclusão. ",
+                today.minusDays(-2),
+                false,
+                userService.getUserByEmail("manager@mail.com").getName(),
+                userService.getUserByEmail("manager@mail.com"),
+                projectAdmin,
+                gerencia   
+        ));
+        
+      //Atividade Admin 3
+        taskService.createTask(new Task(
+                "Cadastro de Atividades Dentro Projeto",
+                "Uma vez que tenha cadastrado seu novo projeto, na lista de projetos, clique em cima do seu nome que você será direcionado para página de lista de atividades daquele projeto, então indo no botão clicar Nova Atividade, preencha todos os campos necessários e então confime para Salvar. Preencha as atividades a serem feitas com os objetivos e quantidades desejaveis, para então marcamos essa etapa também como finalizada e então avançarmos.",
+                today.minusDays(-2),
+                false,
+                userService.getUserByEmail("manager@mail.com").getName(),
+                userService.getUserByEmail("manager@mail.com"),
+                projectAdmin,
+                gerencia   
+        ));
+        
+      //Atividade Admin 4
+        taskService.createTask(new Task(
+                "Cadastro e Controle de Usuários",
+                "Pronto, temos projetos e atividades concluidas, agora precisaremos cadastrar novos usuários para que possamos ter o controle necessário e encaminharmos atividades para que ele ou eles sejam responsaveis. Para isso vamo no Menu Lista de Usuários, ao direcionado na pagina, será possivel ver usuários já cadastrados no sistema, como o Administrador (Manager) e o Game Master. Mas o nosso foco para agora será o botão para  registrarmos um novo usuário, que ao clicar no botão, será necessário adicionar todos os campos obrigatórios e confirmar para salva-lo. Com esse processo finalizado, você poderá marcar essa etapa para avançarmos. DICA: Analisando a ultima coluna da lista de usua´rios, será possivel ver que o administrador também editar ou então deletar usuários, mas que se já estiver com atividades consigos, não é recomendado sua exclusão. ",
+                today.minusDays(-2),
+                false,
+                userService.getUserByEmail("manager@mail.com").getName(),
+                userService.getUserByEmail("manager@mail.com"),
+                projectAdmin,
+                gerencia   
+        ));
+        
+      //Atividade Admin 5
+        taskService.createTask(new Task(
+                "Encaminhar Atividades para o Novo Usuário Registrado",
+                "Com atividades e o usuário criado, vamos agora encaminhar as suas atividades criadas para este usuário. Para realizarmos esses passos, vamos retornar na lista de projetos, entrar no seu projeto criado no decorrer destas etapas e clicar no botão Designar Atividades. Na parte superior da página, será apresentando todos usuários cadastrados no sistema, então ao clicar sobre o seu usuário que foi criado em etapas anteriores, vai ser atualizado a tabela de atividades a serem realizadas, encaminhe as atividades criadas do seu projeto pelo botão Encaminhar. Com isso estaremos finalizando também está etapa e podendo seguir para proxima. DICA: Para retirar uma atividade encaminhada, basta clicar no botão Retirar da atividade.",
+                today.minusDays(-2),
+                false,
+                userService.getUserByEmail("manager@mail.com").getName(),
+                userService.getUserByEmail("manager@mail.com"),
+                projectAdmin,
+                gerencia   
+        ));
+        
+      //Atividade Admin 6
+        taskService.createTask(new Task(
+                "Marcar As atividades Como Concluidas",
+                "Uma vez que as suas atividades tenham sido realizadas, você poderá marcar-lá como completadas por meio da coluna Finalizado, que seria exatamente igual a atividade que você vinha fazendo para o seu segmento de etapas no decorrer desse projeto. Uma vez que você realize essa ação, você estará dando pontos e exp. ao usuário que está como responsavel. Uma vez feita essa atividade, você pode marca-lá como finalizada para seguirmos em nossa jornada.",
+                today.minusDays(-2),
+                false,
+                userService.getUserByEmail("manager@mail.com").getName(),
+                userService.getUserByEmail("manager@mail.com"),
+                projectAdmin,
+                gerencia   
+        ));
+        
+      //Atividade Admin 7
+        taskService.createTask(new Task(
+                "Marcar O Projeto como Finalizado",
+                "Este por sua vez quando tiver todas as suas atividades concluidas, será um processo natural para que marquemos este projeto criado, também fique como finalizado, para assim seguirmos em frente com novos desafios.",
+                today.minusDays(-2),
+                false,
+                userService.getUserByEmail("manager@mail.com").getName(),
+                userService.getUserByEmail("manager@mail.com"),
+                projectAdmin,
+                gerencia   
+        ));
+        
+      //Atividade Admin 8
+        taskService.createTask(new Task(
+                "Conclusão ao Papel do Administrador",
+                "Com isso finalizamos nossas ultimas atividades no projeto Aprendendo a mexer no sistema como Administrador ou Gerente de Projetos, achou interessante? Para encerramos perfeitamente este projeto, conclua está atividade. Após isso, realizar os proximos projetos ou então basta apenas se divertir da maneira que desejar no sistema. Até Mais!!",
+                today.minusDays(-2),
+                false,
                 userService.getUserByEmail("manager@mail.com").getName(),
                 userService.getUserByEmail("manager@mail.com"),
                 projectAdmin,
                 gerencia   
         ));
 
-     //Atividade Admin 2
-        taskService.createTask(new Task(
-                "Segunda Atividade Teste ",
-                "Segunda Descrição Atividade Teste.",
-                today.minusDays(-2),
-                true,
-                userService.getUserByEmail("manager@mail.com").getName(),
-                userService.getUserByEmail("manager@mail.com"),
-                projectAdmin,
-                gerencia
-
-        ));
-        
       //Projeto Tutorial do Game Master --------------------------------------------------------------------------------------------------------
         
      	//Usuário GameMaster Teste
@@ -168,7 +239,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                 "images/admin.png");
         userService.createUser(gamemaster); 
         userService.changeRoleToGameMaster(gamemaster); // Usuário com papel GameMaster não pode ser deletado
-        
+        //Projeto inicial do Game Master
         Project projectGameMaster = projectService.createProject(new Project(
         		"Aprendendo a mexer no sistema como Game Master",
         		today,
@@ -283,7 +354,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                 "User",
                 "112233",
                 "images/user.png"));
-        //Projeto de atividades para o Colaborador
+      //Projeto inicial do Colaborador
         Project project = projectService.createProject(new Project(
         		"Aprendendo a mexer no sistema como Colaborador",
         		today,
@@ -295,7 +366,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         taskService.createTask(new Task(
                  "Introdução ao Papel do Colaborador",
                  "Olá, tudo bem? Vamos conhecer quais são as principais funções e papel do Colaborador no sistema? Os colaboradores serão os usuários casuais no uso do sistema, serão aqueles executarão as atividades dos projetos criados pelo Administrador ou Gerente de Projetos, como também aqueles que comprarão e utilizaração os itens criados pelo Game Master do sistema. De forma resumida, são os jogadores ou então os players. Vamos iniciar nossa jornada em como podemos interagir com o sistema, sendo inicialmente concluido está atividade na coluna Finlizado. Vamos lá!",
-                 today.minusDays(-1),
+                 today.minusDays(-2),
                  false,
                  userService.getUserByEmail("user@mail.com").getName(),
                  userService.getUserByEmail("user@mail.com"),
@@ -307,7 +378,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         taskService.createTask(new Task(
                  "Acessando sua pagina de perfil",
                  "Será na pagina de Perfil que encontraremos nossos principais dados pessoais e demais registros que nos cerca enquanto um usuário do sistema. Para entrar no cadastro de perfil, vá no cabeçalho da pagina onde apresenta a descrição de email do usuário logado, proximo a opção de sair (fazer logout do sistema). Uma vez que chegue na pagina de perfil, você poderá estar concluido essa atividade eentão partirmos para próxima da lista do projeto.",
-                 today.minusDays(-1),
+                 today.minusDays(-2),
                  false,
                  userService.getUserByEmail("user@mail.com").getName(),
                  userService.getUserByEmail("user@mail.com"),
@@ -319,7 +390,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         taskService.createTask(new Task(
                  "Atualizando uma imagem de Avatar",
                  "Acessando a pagina de perfil, será possivel verificar a possibilidade atualizar a sua imagem de usuário com uma imagem que desejar gerar seu avatar dentro do sistema. Para realizarmos esse processo, basta clicar no botão Atualizar meu Avatar e então confirmar a imagem que desejarmos. Pronto! Com essa atividade feita, poderemos conclui-la e então seguirmos adiante.",
-                 today.minusDays(-1),
+                 today.minusDays(-2),
                  false,
                  userService.getUserByEmail("user@mail.com").getName(),
                  userService.getUserByEmail("user@mail.com"),
@@ -331,7 +402,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         taskService.createTask(new Task(
                  "Vendo Lista Afinidades do Perfil",
                  "As afinidades serão uma caracteristica, experiencia e representação tipo de atividade que você executa ou já executou no sistema e para cada atividade que concluirmos, ganharemos experiência nessa afinidade, como também a experiencia do usuário de forma geral. Como já foram concluidas atividades anteriores no decorrer do andamento dese projeto, você vai vizualizar que já existe um nivel de experiencia e uma afinidade sendo apresentada. Com essa explicação, concluimos nossa atividade e então poderemos ir para proxima deixando está como finalizada.",
-                 today.minusDays(-1),
+                 today.minusDays(-2),
                  false,
                  userService.getUserByEmail("user@mail.com").getName(),
                  userService.getUserByEmail("user@mail.com"),
@@ -343,7 +414,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         taskService.createTask(new Task(
                  "Comprando um Item",
                  "É possivel perceber na pagina de perfil do usuário, onde é mostrado os dados pessoais do usuario como nome e email, verá que tem uma informação ferente à pontos. Com eles, podemos ir ao menu Loja no cabeçalho da pagina e então fazer uma compra com item que desejarmos (Ou que conseguirmos comprar com os pontos que temos! xD). Uma vez que você comprar o item desejado, poderemos realizar a finalização dessa atividade e darmos continuidade com a nossa lista. Vamos lá!",
-                 today.minusDays(-1),
+                 today.minusDays(-2),
                  false,
                  userService.getUserByEmail("user@mail.com").getName(),
                  userService.getUserByEmail("user@mail.com"),
@@ -356,7 +427,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                  "Vendo Itens Comprados",
                  "\n"
                  + "Uma vez que tenha comprado o item desejado, você poderá ve-lo na página de perfil do usuario. Ao ver o item comprado, você poderá clicar no botão Utiliza-lo para quando desejar querer executar ou solicitar algo que esteja relacionado contexto do seu item comprado. DICA: Uma vez que você clicar que deseja utiliza-lo, você não poderá mais utiliza-lo novamente. Será necessário comprar o item novamente. Uma vem que realize essa etapa, você poderá marcar está atividade como concluida para então prosseguirmos.",
-                 today.minusDays(-1),
+                 today.minusDays(-2),
                  false,
                  userService.getUserByEmail("user@mail.com").getName(),
                  userService.getUserByEmail("user@mail.com"),
@@ -368,7 +439,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         taskService.createTask(new Task(
                  "Vendo o Ranking",
                  "Uma vez que tenha comprado o item desejado, você poderá ve-lo na página de perfil do usuario. Ao ver o item comprado, você poderá clicar no botão Utiliza-lo para quando desejar querer executar ou solicitar algo que esteja relacionado contexto do seu item comprado. DICA: Uma vez que você clicar que deseja utiliza-lo, você não poderá mais utiliza-lo novamente. Será necessário comprar o item novamente. Uma vem que realize essa etapa, você poderá marcar está atividade como concluida para então prosseguirmos.",
-                 today.minusDays(-1),
+                 today.minusDays(-2),
                  false,
                  userService.getUserByEmail("user@mail.com").getName(),
                  userService.getUserByEmail("user@mail.com"),
@@ -380,7 +451,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         taskService.createTask(new Task(
                  "Conclusão ao Papel do Colaborador",
                  "Com isso finalizamos nossas ultimas atividades no projeto Aprendendo a mexer no sistema como Coaborador, achou interessante? Para encerramos perfeitamente este projeto, conclua está atividade. Após isso, realizar os proximos projetos ou então basta apenas se divertir da maneira que desejar no sistema. Até Mais!!",
-                 today.minusDays(-1),
+                 today.minusDays(-2),
                  false,
                  userService.getUserByEmail("user@mail.com").getName(),
                  userService.getUserByEmail("user@mail.com"),
