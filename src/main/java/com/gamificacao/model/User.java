@@ -30,7 +30,7 @@ public class User {
     @Column 
     private Integer experience = 0; // atributo para medir o nivel de experiencia total do usuário
     @Column 
-    private Integer points = 0; // atributo utilizado para medir quantidade de pontos do usuário para que possa comprar itens
+    private Long points; // atributo utilizado para medir quantidade de pontos do usuário para que possa comprar itens
     
 
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
@@ -169,11 +169,11 @@ public class User {
 		this.experience = experience;
 	}
 	
-	public Integer getPoints() {
+	public Long getPoints() {
 		return points;
 	}
 
-	public void setPoints(Integer points) {
+	public void setPoints(Long points) {
 		this.points = points;
 	}
 }
