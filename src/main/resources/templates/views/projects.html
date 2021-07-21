@@ -36,12 +36,11 @@
 
                 <thead class="table-primary">
                 <tr>
-                    <th style="width:30%" class="text-left">Nome do Projeto</th>
-                    <th style="width:10%">Prazo Final</th>
-                    <th style="width:10%" class="d-none d-lg-table-cell">DeadLine</th>
-                    <th style="width:12%">Finalizado?</th>
-                    <th style="width:11%" class="d-none d-lg-table-cell">Criador</th>
-                    <th style="width:16%" class="d-none d-lg-table-cell" colspan="2">Ações</th>
+                    <th style="width:40%" class="text-left">Nome do Projeto</th>
+                    <th style="width:15%">Prazo Final</th>
+                    <th style="width:15%">Finalizado?</th>
+                    <th style="width:20%" class="d-none d-lg-table-cell">Criador</th>
+                    <th style="width:15%" class="d-none d-lg-table-cell" colspan="2">Ações</th>
                 </tr>
 
                 </thead>
@@ -65,12 +64,6 @@
                     <td th:text="${#temporals.format(t.date, 'dd-MM-yyyy')}"
                         th:data-order="${t.date}"
                     ></td>
-
-                    <!--Dias Faltando -->
-                    <td class="text-center col-1 d-none d-lg-table-cell"
-                        th:data-order="${t.date}">
-                       
-                   </td> 
 
                     <!--projetos finalizadas ou em andamento-->
                      <td th:data-order="${t.completed} ? 1 : 0"

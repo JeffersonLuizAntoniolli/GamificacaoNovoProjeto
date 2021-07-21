@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 <head>
 	<meta charset="utf-8">
@@ -18,7 +19,7 @@
     <div class="card mb-3">
 
         <h1 class="my-highest-header card-header">Lista de Afinidades
-        	 <span>
+        	 <span sec:authorize="hasRole('ROLE_GAMEMASTER')">
                 <a href="/affinity/create" class="btn btn-outline-info btn-lg float-right">Criar uma Nova Afinidade</a>
             </span> 
         </h1>
@@ -29,9 +30,9 @@
 
                 <thead class="table-primary">
                 <tr>
-                    <th style="width:20%" class="text-left">Nome da Afinidade</th>
-                    <th style="width:65%" class="text-left">Descrição da Afinidade</th>
-                    <th style="width:15%" class="d-none d-lg-table-cell" colspan="2">Ações</th>
+                    <th style="width:20%" class="text-center">Nome da Afinidade</th>
+                    <th style="width:65%" class="text-center">Descrição da Afinidade</th>
+                    <th sec:authorize="hasRole('ROLE_GAMEMASTER')" style="width:15%" class="d-none d-lg-table-cell" colspan="2">Ações</th>
                 </tr>
 
                 </thead>
@@ -64,7 +65,7 @@
                     <td th:text="${t.description}" class="d-none d-lg-table-cell"></td>
                     
                     <!--botão editar-->
-                    <td class="d-none d-lg-table-cell">
+                    <td sec:authorize="hasRole('ROLE_GAMEMASTER')" class="d-none d-lg-table-cell">
                         <a th:href="${'/affinity/edit/' + t.id}" class="btn btn-outline-success btn-sm">Editar</a>
                     </td>
 
@@ -76,7 +77,7 @@
                     </td> -->
 
                     <!--botão deletar-->
-                    <td class="d-none d-lg-table-cell">
+                    <td sec:authorize="hasRole('ROLE_GAMEMASTER')" class="d-none d-lg-table-cell">
                         <a data-toggle="modal" data-target="#modal-delete"
                            th:attr="data-target='#modal-delete'+${t.id}"
                            th:href="${'/affinity/delete/' + t.id}"

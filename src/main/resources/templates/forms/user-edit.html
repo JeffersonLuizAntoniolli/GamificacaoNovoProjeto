@@ -24,10 +24,15 @@
 
             <form th:action="@{'/user/edit/'+ ${user.id}}" th:object="${user}" method="post">
                 <input type="hidden" th:field="*{id}"/>
-
+                <!-- <input type="hidden" th:field="*{email}"/> -->
+                <input type="hidden" th:field="*{password}"/>
+                <input type="hidden" th:field="*{experience}"/>
+                <input type="hidden" th:field="*{points}"/>
+				<input type="hidden" th:field="*{photo}"/>
+				
                 <!--Nome da Pessoa-->
                 <div class="form-group">
-                    <label for="name" class="form-control-label">Nome do Usuario:</label>
+                    <label for="name" class="form-control-label">Seu Nome Completo:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-pen"></i></span>
@@ -41,7 +46,20 @@
                     </div>
                 </div>
               
-                
+                <!--Email da Pessoa-->
+                <div class="form-group">
+                    <label for="email" class="form-control-label">Seu E-mail:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-pen"></i></span>
+                        </div>
+                        <input type="text" class="form-control"
+                               th:field="*{email}" id="email"/>
+                    </div>
+                    <div class="text text-danger"
+                         th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                    </div>
+                </div>
 
                 <input type="submit" value="Confirmar" class="btn btn-primary"/>
                 <button type="reset" class="btn btn-outline-primary pull-right ml-3">Restaurar</button>

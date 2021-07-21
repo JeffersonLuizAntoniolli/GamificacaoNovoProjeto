@@ -48,7 +48,6 @@ public class ProjectServiceImpl implements ProjectService{
 		Project project = projectRepository.getOne(id);
         project.setCompleted(true);
         projectRepository.save(project);
-		
 	}
 
 	@Override

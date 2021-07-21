@@ -57,7 +57,7 @@
                 
                	<!--Afinidades-->
                 <li th:class="${activeTab == 'Ranking'}? 'active nav-item mr-4' : 'nav-item mr-4'"
-                    sec:authorize="hasRole('ROLE_GAMEMASTER')">
+                    sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/affinitys">Afinidades</a>
                 </li>
                 
