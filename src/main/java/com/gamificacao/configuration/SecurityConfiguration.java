@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**")
                 .permitAll() // Acesso liberado para todos sem necessidade acesso, ou seja, acessa de forma publica 
 
-                .antMatchers("/profile/**", "/tasks/**", "/task/**", "/users", "/user/**", "/h2-console/**", "/projects/**","/items**","/item/**", "/affinity/**", "/affinitys**", "/ranking")
+                .antMatchers("/profile/**", "/tasks/**", "/task/**", "/users", "/user/**", "/h2-console/**", "/projects/**","/items**","/item/**", "/affinity/**", "/affinitys**", "/ranking","/ranking/**")
                 .hasAnyRole("USER, ADMIN, GAMEMASTER") // Permetir somente os acessos das paginas acima para os três papeis criados para execução do projetos
 
                 .antMatchers("/assignment/**") 
