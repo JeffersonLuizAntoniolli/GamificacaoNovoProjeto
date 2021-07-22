@@ -17,44 +17,84 @@
 
 <main class="container">
     <div class="alert alert-dark">
-        <center><h1 class="my-highest-header">Verifique Os Primeiros Lugares Do Ranking!!!! :)</h1></center>
+        <div class="text-center"><h1 class="my-highest-header">Verifique Os Primeiros Lugares Do Ranking!!!! :)</h1></div>
     </div>
     	<br>
+    	
     	<!--  Os Primeiros Usuários com as Maiores Experiências de Usuário do Sistema -->
-		<center><h4>As Maiores Exeperiências De Usuário</h4></center>
+		<div class="text-center"><h4>As Maiores Exeperiências De Usuário</h4></div>
         <table class="my-tab table text-left">
 
-            <thead class="table-info">
+            <thead class="table-light">
                 <tr>
                     <th style="width:34%">Nome do Participante</th>
                     <th style="width:33%">Email do Participante</th>
                     <th style="width:33%" class="d-none d-sm-table-cell">Experiência Total de Usuário</th>
                 </tr>
             </thead>
+            <tbody>
+            	<tr th:each="u : ${usuariosExp}">
+            		<td th:text="${u.name}" class="d-none d-lg-table-cell"></td>  
+            		<td th:text="${u.email}" class="d-none d-lg-table-cell"></td>  
+            		<td th:text="${u.experience}" class="d-none d-lg-table-cell"></td>  
+            	</tr>
+            </tbody>
         </table>
         
         
         <br>
         <!--  Os Primeiros Usuários com as Maiores Quantidades de Pontos do Sistema -->
-		<center><h4>Os Usuários Com As Maiores Quantidades de Pontos Acumulados</h4></center>
+		<div class="text-center"><h4>Os Usuários Com As Maiores Quantidades de Pontos Acumulados</h4></div>
         <table class="my-tab table text-left">
 
-            <thead class="table-info">
+            <thead class="table-light">
                 <tr>
                     <th style="width:34%">Nome do Participante</th>
                     <th style="width:33%">Email do Participante</th>
                     <th style="width:33%" class="d-none d-sm-table-cell">Total Pontos de Usuário</th>
                 </tr>
             </thead>
+            <tbody>
+            	<tr th:each="u : ${usuariosPontos}">
+            		<td th:text="${u.name}" class="d-none d-lg-table-cell"></td>  
+            		<td th:text="${u.email}" class="d-none d-lg-table-cell"></td>  
+            		<td th:text="${u.experience}" class="d-none d-lg-table-cell"></td>  
+            	</tr>
+            </tbody>
         </table>
         
         <br>
+        <div class="text-center"><h4>As Afinidades com as maiores pontuações de Experiências</h4></div>
+		<div class="text-center"><h6>Serão considerados o total de experiencia acumulada considerando todos os usuários do sistema</h6></div>
+        
+        <form action="">
+    		<div class="row">
+    			<div class="col-md-9">
+		    		<div class="form-group">
+		                
+		                <div class="input-group mb-3">
+		                	<select 
+					    			id="order" 
+					    			name="order" 
+					    			class="form-control" 
+					    			data-show-subtext="true" 
+					    			data-live-search="true" 
+									th:field="*{order}" >
+					            <option th:each="a : ${affinitys}" th:value="${a.id}" th:text="${a.name}"></option>
+					    	</select>
+		                
+		                </div>
+		            </div>
+	            </div>
+		    	<div class="col-md-3">
+		    		<button type="submit" class="btn btn-success">atualizar</button>
+		    	</div>
+	    	</div>
+    	</form>
         <!--  As Afinidades com As Maiores Experiências do Jogo -->
-		<center><h4>As Afinidades com as maiores pontuações de Experiências</h4></center>
-		<center><h6>Serão considerados o total de experiencia acumulada considerando todos os usuários do sistema</h6></center>
-        <table class="my-tab table text-left">
+		<table class="my-tab table text-left">
 
-            <thead class="table-info">
+            <thead class="table-light">
                 <tr>
                     <th style="width:34%">Nome da Afinidade</th>
                     <th style="width:33%">Descrição da Afinidade</th>
