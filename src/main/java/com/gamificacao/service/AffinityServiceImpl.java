@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.gamificacao.model.Affinity;
 import com.gamificacao.model.Task;
 import com.gamificacao.model.User;
+import com.gamificacao.model.UserAffinity;
 import com.gamificacao.repository.AffinityRepository;
 import com.gamificacao.repository.TaskRepository;
 
@@ -48,7 +49,5 @@ public class AffinityServiceImpl implements AffinityService {
 	public Affinity getAffinityById(Long AffinityId) {
 		return affinityRepository.findById(AffinityId).orElse(null);
 	}
-
-    
 
 }
