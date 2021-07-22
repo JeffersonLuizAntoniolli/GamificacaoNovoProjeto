@@ -1,5 +1,7 @@
 package com.gamificacao.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,16 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.gamificacao.model.User;
+import com.gamificacao.model.UserItems;
+import com.gamificacao.repository.UserItemRepository;
 import com.gamificacao.service.TaskService;
 import com.gamificacao.service.UserService;
-
-import java.security.Principal;
 
 @Controller
 public class ProfileController {
 	
     private UserService userService;
     private TaskService taskService;
+    @Autowired
+    private UserItemRepository userItemRepository;
 
     @Autowired
     public ProfileController(UserService userService, TaskService taskService) {
@@ -44,6 +48,16 @@ public class ProfileController {
     @GetMapping("/profile/unmark-done/{taskId}")
     public String setTaskNotCompleted(@PathVariable Long taskId) {
         taskService.setTaskNotCompleted(taskId);
+        return "redirect:/profile";
+    }
+    
+    @GetMapping("/profile/consume/{id}")
+    public String consumeItem(@PathVariable Long id, Model model, Principal principal) {
+    	UserItems userItem = userItemRepository.findById(id).orElse(null);
+    	if(userItem != null) {
+    		userItem.setUsed(true);
+    		userItemRepository.save(userItem);
+    	}
         return "redirect:/profile";
     }
 

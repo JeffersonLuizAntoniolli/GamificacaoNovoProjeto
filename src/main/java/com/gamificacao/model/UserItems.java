@@ -49,6 +49,8 @@ public class UserItems {
 		this.isUsed = isUsed;
 	}
 	
-	
+	public boolean getIsUsed() {
+		return isUsed;
+	}
 	
 }

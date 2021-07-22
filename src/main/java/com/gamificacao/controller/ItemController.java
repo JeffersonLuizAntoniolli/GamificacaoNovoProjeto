@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gamificacao.model.Item;
 import com.gamificacao.service.ItemService;
+import com.gamificacao.service.UserService;
 
 @Controller
 public class ItemController {
@@ -88,9 +89,4 @@ public class ItemController {
 		return "views/items";
     }
     
-    @GetMapping("/item/consume/{id}")
-    public String consumeItem(@PathVariable Long id, Model model, Principal principal) {
-    	itemService.deleteItem(id);
-        return "redirect:/profile";
-    }
 }

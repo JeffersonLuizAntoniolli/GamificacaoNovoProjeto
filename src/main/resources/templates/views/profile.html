@@ -89,8 +89,13 @@
                     <td class="text-left d-none d-sm-table-cell" th:text="${t.item.description}"></td>
 				
 					<!--botão Consumir ou Utilizar Item-->
-	                <td  class="d-none d-lg-table-cell">
-	                	<a th:href="${'/item/consume/' + t.id}" class="btn btn-outline-warning btn-lg">Consumir</a>
+	                <td   class="d-none d-lg-table-cell">
+	                	<div th:if="${t.isUsed==false}">
+	                		<a  th:href="${'/profile/consume/' + t.id}" class="btn btn-outline-warning btn-lg">Consumir</a>
+	                	</div>
+	                	<div th:if="${t.isUsed==true}">
+	                		<p>Já Consumido</p>
+	                	</div>
 	                </td>
 				
 				
