@@ -14,7 +14,7 @@ import java.security.Principal;
 
 @Controller
 public class ProfileController {
-
+	
     private UserService userService;
     private TaskService taskService;
 
@@ -30,6 +30,8 @@ public class ProfileController {
         User user = userService.getUserByEmail(email);
         model.addAttribute("user", user);
         model.addAttribute("tasksOwned", taskService.findByOwnerOrderByDateDesc(user));
+        model.addAttribute("userAffinity", userService.ListAffinityByUser(user.getId()));
+        model.addAttribute("userItems", userService.ListItemsByUser(user.getId()));
         return "views/profile";
     }
     // na pagina do perfil onde vai listar as atividades do usuário como responsavel, metodo que vai marcar como completo 

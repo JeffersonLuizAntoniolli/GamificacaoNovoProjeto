@@ -87,4 +87,10 @@ public class ItemController {
 		model.addAttribute("successMessage", "Item comprado com sucesso");
 		return "views/items";
     }
+    
+    @GetMapping("/item/consume/{id}")
+    public String consumeItem(@PathVariable Long id, Model model, Principal principal) {
+    	itemService.deleteItem(id);
+        return "redirect:/profile";
+    }
 }

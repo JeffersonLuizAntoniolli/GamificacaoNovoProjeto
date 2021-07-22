@@ -23,7 +23,7 @@
 
         <div class="card card-body">
             <div class="row">
-
+			<table>
                 <div class="col-sm-10">
                     <h2 class="my-second-header" th:text="'Nome: '+${user.name}"></h2>
                     <h2 class="my-second-header" th:text="'Email: '+${user.email}"></h2>
@@ -33,7 +33,7 @@
                 <div class="col-6 col-sm-2">
                 	<div>
                 		<div>
-                    		<a href="/user/uploadavatar" class="btn btn-info">Atualizar seu Avatar!</a>
+                    		<a href="/user/uploadavatar" class="btn btn-primary">Atualizar seu Avatar!</a>
                     	</div>
                     </div>
                     <div class="card card-body mb-3 p-2">
@@ -41,56 +41,66 @@
                     </div>
             	</div>
 			
-			 </table>
+			</table>
             <!-- Lista de Afinidades do Perfil Acessado -->
             <h2>Sua Lista de Afinidades</h2>
             <table class="my-tab table text-left">
 
-                <thead class="table-info">
+                <thead class="table-primary">
                 <tr>
-                    <th style="width:20%">Nome da Afinidade</th>
-                    <th style="width:60%" class="d-none d-sm-table-cell">Descrição da Afinidade</th>
-                    <th style="width:20%">Experiencia da Afinidade</th>
+                    <th style="width:20%">Nome</th>
+                    <th style="width:60%" class="d-none d-sm-table-cell">Descrição</th>
+                    <th style="width:20%">Experiencia na Afinidade</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="t : ${useraffinity}">
+                <tr th:each="t : ${userAffinity}">
 
-                    <td class="text-left" th:text="${t.name}"></td>
-                    <td class="text-left d-none d-sm-table-cell" th:text="${t.description}"></td>
+                    <td class="text-left" th:text="${t.affinity.name}"></td>
+                    <td class="text-left d-none d-sm-table-cell" th:text="${t.affinity.description}"></td>
+                    <td class="text-left d-none d-sm-table-cell" th:text="${t.experience}"></td>
 
-				<!-- Se não tiver afinidade vinculada por executar atividades, será mostrado mensagem de exceção -->
-               <!--  <tr th:if="${user.affinity.size()==0}">
-                    <td colspan="5" th:text="${'Sem afinidades encaminhadas para '+ user.name}"></td>
+				<!-- Se não tiver afinidade vinculada por executar atividades, será mostrado mensagem de exceção 
+
+                 <tr th:if="${t.size()==0}">
+                    <td colspan="5" th:text="${'Sem afinidades vinculadas ao '+ user.name}"></td>
                 </tr> -->
                 
                 </tbody>
                 
                
             </table>
-            
+			<hr class="my-4">
             <!-- Lista de Itens Comprados pelo Perfil Acessado -->
             <h2>Sua Lista de Itens Comprados</h2>
             <table class="my-tab table text-left">
 
-                <thead class="table-info">
+                <thead class="table-primary">
                 <tr>
                     <th style="width:20%">Nome do Item</th>
                     <th style="width:50%" class="d-none d-sm-table-cell">Descrição do Item</th>
-                    <th style="width:20%">Custo do Item</th>
-                    <th style="width:20%">Ação</th>
+                    <th style="width:10%">Ação</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="t : ${useraffinity}">
+                 <tr th:each="t : ${userItems}">
 
-                    <td class="text-left" th:text="${t.name}"></td>
-                    <td class="text-left d-none d-sm-table-cell" th:text="${t.description}"></td>
-
+                    <td class="text-left" th:text="${t.item.name}"></td>
+                    <td class="text-left d-none d-sm-table-cell" th:text="${t.item.description}"></td>
+				
+					<!--botão Consumir ou Utilizar Item-->
+	                <td  class="d-none d-lg-table-cell">
+	                	<a th:href="${'/item/consume/' + t.id}" class="btn btn-outline-warning btn-lg">Consumir</a>
+	                </td>
+				
+				
+				
 				<!-- Se não tiver afinidade vinculada por executar atividades, será mostrado mensagem de exceção
                 <tr th:if="${user.affinity.size()==0}">
                     <td colspan="5" th:text="${'Sem afinidades encaminhadas para '+ user.name}"></td> -->
-                </tr>
+               <!--  </tr> -->
+                
+                
                 
                 </tbody> 
 
@@ -100,12 +110,12 @@
 			<h2>Sua Lista de Atividades</h2>
             <table class="my-tab table text-left">
 
-                <thead class="table-info">
+                <thead class="table-primary">
                 <tr>
                     <th style="width:20%">Nome da Atividade</th>
                     <th style="width:50%" class="d-none d-sm-table-cell">Descrição da Atividade</th>
                     <th style="width:16%">Data</th>
-                    <th style="width:7%">Dias Faltando</th>
+                    <th style="width:7%">DF</th>
                     <th style="width:7%">Finalizado?</th>
 
                 </tr>

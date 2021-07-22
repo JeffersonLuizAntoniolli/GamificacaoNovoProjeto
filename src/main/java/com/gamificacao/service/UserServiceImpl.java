@@ -8,8 +8,12 @@ import com.gamificacao.model.Project;
 import com.gamificacao.model.Role;
 import com.gamificacao.model.Task;
 import com.gamificacao.model.User;
+import com.gamificacao.model.UserAffinity;
+import com.gamificacao.model.UserItems;
 import com.gamificacao.repository.RoleRepository;
 import com.gamificacao.repository.TaskRepository;
+import com.gamificacao.repository.UserAffinityRepository;
+import com.gamificacao.repository.UserItemRepository;
 import com.gamificacao.repository.UserRepository;
 
 import java.util.*;
@@ -23,8 +27,10 @@ public class UserServiceImpl implements UserService {
     private TaskRepository taskRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-
+    @Autowired
+    private UserAffinityRepository userAffinityRepository;
+    @Autowired
+    private UserItemRepository userItemRepository;
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            TaskRepository taskRepository,
@@ -98,5 +104,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+	@Override // serviço que vai listar todas afinidades do usuário;
+	public List<UserAffinity> ListAffinityByUser(Long id) {
+		return userAffinityRepository.ListAffinityByUser(id);
+	}
+
+	
+	  @Override // serviço que vai listar todos itens do usuário; public
+	 public List<UserItems> ListItemsByUser(Long id) { 
+		  return userItemRepository.ListItemsByUser(id); }
+	 
 }
 
